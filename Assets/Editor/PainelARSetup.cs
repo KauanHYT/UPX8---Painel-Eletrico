@@ -35,6 +35,10 @@ namespace PainelAR.EditorTools
                     removidos += GameObjectUtility.RemoveMonoBehavioursWithMissingScript(t.gameObject);
             var overlay = GameObject.Find("WL03 Status Overlay");
             if (overlay != null) UnityEngine.Object.DestroyImmediate(overlay);
+            // Sem altura extra na câmera: no celular não muda nada (câmera e marcadores usam o mesmo
+            // referencial), e na simulação o reconhecimento depende da posição real da câmera.
+            var origin = UnityEngine.Object.FindAnyObjectByType<XROrigin>();
+            if (origin != null) origin.CameraYOffset = 0f;
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
@@ -57,6 +61,8 @@ namespace PainelAR.EditorTools
                     if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject) > 0)
                     { Debug.LogError("[PainelAR] Script ausente em " + t.name); erros++; }
             if (GameObject.Find("WL03 Status Overlay") != null) { Debug.LogError("[PainelAR] Objeto do WL03 ainda na cena"); erros++; }
+            var origin = UnityEngine.Object.FindAnyObjectByType<XROrigin>();
+            if (origin != null && origin.CameraYOffset != 0f) { Debug.LogError("[PainelAR] Camera Y Offset do XR Origin deve ser 0"); erros++; }
 
             if (!ARCoreAtivo()) { Debug.LogError("[PainelAR] ARCore Loader não habilitado para Android"); erros++; }
             if (PlayerSettings.GetApplicationIdentifier(UnityEditor.Build.NamedBuildTarget.Android) != "br.edu.facens.painelar")
