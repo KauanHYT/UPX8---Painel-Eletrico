@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 983344448}
   - component: {fileID: 983344447}
   - component: {fileID: 983344446}
+  - component: {fileID: 983344449}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -403,7 +404,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 983344444}
   m_CameraFloorOffsetObject: {fileID: 179156375}
   m_RequestedTrackingOriginMode: 0
-  m_CameraYOffset: 1.1176
+  m_CameraYOffset: 0
 --- !u!4 &983344448
 Transform:
   m_ObjectHideFlags: 0
@@ -420,6 +421,18 @@ Transform:
   - {fileID: 179156376}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &983344449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983344444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deab0a89780973e4ab80a82b4a13fc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PainelAR.DiagnosticoMarcadores
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
