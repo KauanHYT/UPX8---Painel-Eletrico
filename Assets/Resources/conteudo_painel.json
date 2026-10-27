@@ -1,0 +1,44 @@
+{
+  "titulo": "Inspeção do circuito de comando do motor",
+  "versao": "0.1-provisoria",
+  "componentes": [
+    {
+      "id": "DJ1",
+      "marcador": "marcador_DJ1",
+      "nome": "Disjuntor geral DJ1",
+      "funcao": "Liga e desliga a alimentação de todo o painel e protege contra curto-circuito.",
+      "alerta": "Ponto de seccionamento. Em um painel real, só é manuseado com EPI e autorização."
+    },
+    {
+      "id": "K1",
+      "marcador": "marcador_K1",
+      "nome": "Contator K1",
+      "funcao": "Chave eletromagnética que liga e desliga o motor a partir do circuito de comando.",
+      "alerta": "Bornes L1/L2/L3 podem estar energizados se o disjuntor estiver ligado."
+    },
+    {
+      "id": "FT1",
+      "marcador": "marcador_FT1",
+      "nome": "Relé de sobrecarga FT1",
+      "funcao": "Desarma o comando do motor quando a corrente passa do valor ajustado.",
+      "alerta": "Não altere o ajuste de corrente sem orientação do responsável."
+    }
+  ],
+  "etapas": [
+    { "numero": 1,  "componenteId": "DJ1", "titulo": "Localizar o disjuntor geral", "instrucao": "Identifique o disjuntor geral DJ1, que alimenta o painel.", "alerta": "Este treinamento usa painel desenergizado. Em campo, confirme o desligamento antes de qualquer contato." },
+    { "numero": 2,  "componenteId": "DJ1", "titulo": "Confirmar posição desligado", "instrucao": "Indique o DJ1 e verifique se a alavanca está na posição DESLIGADO.", "alerta": "" },
+    { "numero": 3,  "componenteId": "DJ1", "titulo": "Simular bloqueio e etiquetagem", "instrucao": "Indique onde o cadeado e a etiqueta de bloqueio seriam instalados.", "alerta": "O bloqueio impede que outra pessoa religue o circuito durante a manutenção." },
+    { "numero": 4,  "componenteId": "K1",  "titulo": "Localizar o contator", "instrucao": "Identifique o contator K1 do motor.", "alerta": "" },
+    { "numero": 5,  "componenteId": "FT1", "titulo": "Localizar o relé de sobrecarga", "instrucao": "Identifique o relé de sobrecarga FT1, montado junto ao contator.", "alerta": "" },
+    { "numero": 6,  "componenteId": "K1",  "titulo": "Simular teste de ausência de tensão", "instrucao": "Indique os bornes de entrada L1/L2/L3 do K1, onde seria feito o teste de ausência de tensão.", "alerta": "Em campo, o teste de ausência de tensão é obrigatório antes de tocar nos bornes." },
+    { "numero": 7,  "componenteId": "FT1", "titulo": "Conferir a corrente de ajuste", "instrucao": "Indique o FT1 e leia o valor de corrente no seletor de ajuste.", "alerta": "" },
+    { "numero": 8,  "componenteId": "K1",  "titulo": "Inspecionar bornes de saída", "instrucao": "Indique o K1 e observe os bornes de saída T1/T2/T3.", "alerta": "" },
+    { "numero": 9,  "componenteId": "FT1", "titulo": "Identificar o botão de rearme", "instrucao": "Indique o FT1 e localize o botão de rearme (reset).", "alerta": "" },
+    { "numero": 10, "componenteId": "DJ1", "titulo": "Conferir a identificação do circuito", "instrucao": "Indique o DJ1 e leia a etiqueta de identificação do circuito.", "alerta": "" },
+    { "numero": 11, "componenteId": "K1",  "titulo": "Identificar os terminais da bobina", "instrucao": "Indique o K1 e localize os terminais da bobina A1 e A2.", "alerta": "" },
+    { "numero": 12, "componenteId": "FT1", "titulo": "Identificar o contato auxiliar", "instrucao": "Indique o FT1 e localize o contato auxiliar NF 95-96.", "alerta": "" },
+    { "numero": 13, "componenteId": "FT1", "titulo": "Concluir inspeção do relé", "instrucao": "Indique o FT1 para registrar a inspeção do relé como concluída.", "alerta": "" },
+    { "numero": 14, "componenteId": "K1",  "titulo": "Concluir inspeção do contator", "instrucao": "Indique o K1 para registrar a inspeção do contator como concluída.", "alerta": "" },
+    { "numero": 15, "componenteId": "DJ1", "titulo": "Simular retirada do bloqueio", "instrucao": "Indique o DJ1, onde o bloqueio seria retirado ao fim do serviço.", "alerta": "Em campo, só quem instalou o bloqueio pode retirá-lo, e apenas com todos afastados do painel." }
+  ]
+}
