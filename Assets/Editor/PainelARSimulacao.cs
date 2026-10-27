@@ -27,6 +27,14 @@ namespace PainelAR.EditorTools
         public static readonly Vector3 CentroPainel = new Vector3(0f, 1.3f, 0f);
         public const float DistanciaCamera = 0.75f; // distância inicial entre a câmera e a placa
 
+        // Centro de cada componente na placa (x, y relativos ao centro), pelo id do conteudo_painel.json
+        public static readonly Dictionary<string, Vector2> PosicaoComponentes = new Dictionary<string, Vector2>
+        {
+            { "DJ1", new Vector2(-0.17f, 0.13f) },
+            { "K1",  new Vector2(0.10f, 0.005f) },
+            { "FT1", new Vector2(0.10f, -0.083f) },
+        };
+
         // Posição de cada marcador na placa (x, y relativos ao centro), ao lado do seu componente
         public static readonly Dictionary<string, Vector2> PosicaoMarcadores = new Dictionary<string, Vector2>
         {
@@ -105,9 +113,9 @@ namespace PainelAR.EditorTools
                 painel.localPosition = CentroPainel;
                 Gabinete(painel);
                 Estrutura(painel);
-                Disjuntor(painel, new Vector3(-0.17f, 0.13f, 0f));
-                Contator(painel, new Vector3(0.10f, 0.005f, 0f));
-                ReleSobrecarga(painel, new Vector3(0.10f, -0.083f, 0f));
+                Disjuntor(painel, PosicaoComponentes["DJ1"]);
+                Contator(painel, PosicaoComponentes["K1"]);
+                ReleSobrecarga(painel, PosicaoComponentes["FT1"]);
                 ReguaDeBornes(painel, -0.215f);
                 Cabos(painel);
                 Etiqueta(painel, "DJ1", new Vector3(-0.12f, 0.175f, 0f));
