@@ -39,10 +39,23 @@ namespace PainelAR.EditorTools
             // referencial), e na simulação o reconhecimento depende da posição real da câmera.
             var origin = UnityEngine.Object.FindAnyObjectByType<XROrigin>();
             if (origin != null) origin.CameraYOffset = 0f;
+            MontarCena();
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
-            Debug.Log("[PainelAR] Projeto configurado (" + removidos + " componente(s) do WL03 removido(s)).");
+            Debug.Log("[PainelAR] Projeto configurado (" + removidos + " componente(s) sem script removido(s)).");
+        }
+
+        // Parte 8 do guia: rastreador no XR Origin e um objeto App com a lógica e a interface
+        static void MontarCena()
+        {
+            var gerenciador = UnityEngine.Object.FindAnyObjectByType<ARTrackedImageManager>();
+            if (gerenciador.GetComponent<RastreadorMarcadores>() == null)
+                gerenciador.gameObject.AddComponent<RastreadorMarcadores>();
+
+            var app = GameObject.Find("App") ?? new GameObject("App");
+            if (app.GetComponent<ProcedimentoController>() == null) app.AddComponent<ProcedimentoController>();
+            if (app.GetComponent<InterfaceApp>() == null) app.AddComponent<InterfaceApp>();
         }
 
         [MenuItem("Painel AR/Validar projeto")]
@@ -55,6 +68,23 @@ namespace PainelAR.EditorTools
             erros += Exigir<ARTrackedImageManager>("AR Tracked Image Manager");
             erros += Exigir<ARCameraManager>("AR Camera Manager");
             erros += Exigir<ARCameraBackground>("AR Camera Background");
+            erros += Exigir<RastreadorMarcadores>("Rastreador Marcadores");
+            erros += Exigir<ProcedimentoController>("Procedimento Controller");
+            erros += Exigir<InterfaceApp>("Interface App");
+            try
+            {
+                // Cada componente do JSON precisa de um marcador com o mesmo nome na biblioteca (Parte 6)
+                var conteudo = PainelAR.ConteudoPainel.Carregar();
+                var biblioteca = UnityEngine.Object.FindAnyObjectByType<ARTrackedImageManager>()?.referenceLibrary;
+                foreach (var componente in conteudo.componentes)
+                {
+                    bool achou = false;
+                    for (int i = 0; biblioteca != null && i < biblioteca.count; i++)
+                        if (biblioteca[i].name == componente.marcador) achou = true;
+                    if (!achou) { Debug.LogError("[PainelAR] Marcador " + componente.marcador + " do JSON não está na biblioteca"); erros++; }
+                }
+            }
+            catch (Exception ex) { Debug.LogError("[PainelAR] conteudo_painel.json: " + ex.Message); erros++; }
 
             foreach (var raiz in scene.GetRootGameObjects())
                 foreach (var t in raiz.GetComponentsInChildren<Transform>(true))
