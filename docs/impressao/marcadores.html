@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Marcadores Painel AR</title>
+<style>
+  @page { size: A4 portrait; margin: 12mm; }
+  body { font-family: Arial, sans-serif; font-size: 10pt; color: #111; margin: 0; }
+  h1 { font-size: 14pt; margin: 0 0 2mm; }
+  .aviso { margin: 0 0 6mm; line-height: 1.35; }
+  .grade { display: flex; flex-wrap: wrap; gap: 10mm 8mm; }
+  .item { display: flex; flex-direction: column; align-items: center; }
+  /* Linha de corte 3 mm em volta do marcador; o marcador tem exatamente 80 mm */
+  .corte { padding: 3mm; border: 0.2mm dashed #888; }
+  .corte img { display: block; width: 80mm; height: 80mm; }
+  .rotulo { margin-top: 2mm; font-size: 9pt; color: #444; }
+  .regua { align-self: center; }
+  .regua .barra { width: 50mm; height: 4mm; margin-bottom: 2mm; border: 0.3mm solid #000; border-top: none;
+    background: repeating-linear-gradient(to right, #000 0 0.3mm, transparent 0.3mm 10mm); }
+</style>
+</head>
+<body>
+  <h1>Marcadores do Painel AR (8 × 8 cm)</h1>
+  <p class="aviso">
+    Imprima em <b>tamanho real (100%)</b>, sem "ajustar à página", de preferência em <b>papel fosco</b>.
+    Meça com uma régua: cada marcador deve ter <b>8,0 cm</b> de lado e a régua ao lado do último, <b>5,0 cm</b>.
+    Se der diferente, corrija o Physical Size na PainelReferenceImageLibrary.
+    Recorte pela linha tracejada e cole cada marcador plano, ao lado do seu componente. O nome fica fora do recorte e não vai para o painel.
+  </p>
+  <div class="grade">
+    <div class="item"><div class="corte"><img src="../../Assets/Markers/marcador_DJ1.png" alt="marcador_DJ1"></div><div class="rotulo">marcador_DJ1 → Disjuntor geral DJ1</div></div>
+    <div class="item"><div class="corte"><img src="../../Assets/Markers/marcador_K1.png" alt="marcador_K1"></div><div class="rotulo">marcador_K1 → Contator K1</div></div>
+    <div class="item"><div class="corte"><img src="../../Assets/Markers/marcador_FT1.png" alt="marcador_FT1"></div><div class="rotulo">marcador_FT1 → Relé de sobrecarga FT1</div></div>
+    <div class="regua"><div class="barra"></div>Régua de conferência: 5,0 cm<br>(traços a cada 1 cm)</div>
+  </div>
+</body>
+</html>

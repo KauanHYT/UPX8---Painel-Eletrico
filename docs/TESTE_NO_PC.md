@@ -22,14 +22,14 @@ Serve para testar a lógica do app. Não substitui os testes técnicos no celula
 
 ## O que deve acontecer
 
-- A câmera começa a 70 cm do painel cinza, com o marcador na frente.
-- Em menos de 1 segundo o marcador ganha uma **placa verde** por cima, e o quadro no topo da tela mostra `WL03EquipmentTarget: VISÍVEL`.
-- Vire a câmera para longe: o quadro passa a mostrar `fora da vista` e a placa some.
-- Volte a olhar para o marcador: ele é reconhecido de novo.
+- A câmera começa a 70 cm do painel cinza, com os 3 marcadores (DJ1, K1 e FT1, de 8 cm) lado a lado.
+- Em menos de 1 segundo cada marcador ganha uma **placa verde** por cima, e o quadro no topo da tela mostra `marcador_DJ1`, `marcador_K1` e `marcador_FT1` como `VISÍVEL`.
+- Vire a câmera para longe: o quadro passa a mostrar `fora da vista` e as placas somem.
+- Volte a olhar para os marcadores: eles são reconhecidos de novo.
 
 Clique em **Play** de novo para parar.
 
-O marcador atual ainda é o do WL03. Na Fase 2 ele é trocado pelos 3 marcadores do painel, e o ambiente é gerado de novo com eles (`Painel AR → Simulação → Configurar simulação no PC`).
+Sempre que a Reference Image Library mudar, gere o ambiente de novo: `Painel AR → Simulação → Configurar simulação no PC`.
 
 ## Teste automático (sem abrir o editor)
 
