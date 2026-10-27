@@ -1,4 +1,4 @@
-# Roda um método de editor do Painel AR no Unity em modo batch (sem abrir o editor).
+﻿# Roda um método de editor do Painel AR no Unity em modo batch (sem abrir o editor).
 # Uso:  powershell -File tools\unity.ps1 ConfigurarProjeto | ValidarProjeto | GerarApk | GerarApkEInstalar
 #       powershell -File tools\unity.ps1 PainelARSimulacao.ConfigurarSimulacao
 #       powershell -File tools\unity.ps1 TesteSimulacao.Executar -SemSair
