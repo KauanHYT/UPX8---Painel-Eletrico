@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: PainelReferenceImageLibrary
+  m_EditorClassIdentifier: Unity.XR.ARSubsystems::UnityEngine.XR.ARSubsystems.XRReferenceImageLibrary
+  m_GuidLow: 5401881352105173893
+  m_GuidHigh: 10825470519365878432
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5711606567885358615
+      m_GuidHigh: 2893964230891350694
+    m_SerializedTextureGuid:
+      m_GuidLow: 7995161195191508314
+      m_GuidHigh: 16022311186845018554
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: marcador_DJ1
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4679681061525474360
+      m_GuidHigh: 173956989717915581
+    m_SerializedTextureGuid:
+      m_GuidLow: 2433245313442245719
+      m_GuidHigh: 18243131970084097849
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: marcador_K1
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5380599150946232773
+      m_GuidHigh: 4769408244893998726
+    m_SerializedTextureGuid:
+      m_GuidLow: 12197027033432321098
+      m_GuidHigh: 13777893932471469083
+    m_Size: {x: 0.08, y: 0.08}
+    m_SpecifySize: 1
+    m_Name: marcador_FT1
+    m_Texture: {fileID: 0}
