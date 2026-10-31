@@ -1,0 +1,10 @@
+flowchart LR
+    CAM[Câmera + ARCore<br/>AR Foundation] --> RAST[RastreadorMarcadores<br/>destaque e mira]
+    JSON[(conteudo_painel.json<br/>componentes e etapas)] --> PROC
+    RAST --> PROC[ProcedimentoController<br/>etapas, alertas e erros]
+    PROC <--> UI[InterfaceApp<br/>telas, botões e FPS]
+    PROC --> REG[RegistroExperimento]
+    REG --> CSV[(CSV no celular)]
+    CSV --> ANA[tools/analisar.ps1<br/>taxa de erros]
+    JSON --> GER[GeradorDocumentoImpresso<br/>menu do editor]
+    GER --> DOC[Manual impresso e ficha<br/>condição de controle]

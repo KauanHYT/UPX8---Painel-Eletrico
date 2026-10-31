@@ -1,0 +1,15 @@
+flowchart TD
+    A[Abrir aplicativo] --> B[Escolher participante]
+    B --> C[Iniciar sessão]
+    C --> D{Etapa tem alerta?}
+    D -- Sim --> E[Exibir alerta de segurança]
+    E --> F[Participante confirma leitura]
+    D -- Não --> G[Mostrar instrução e destacar componente]
+    F --> G
+    G --> H[Participante aponta a mira e confirma]
+    H --> I{Marcador na mira?}
+    I -- Não --> G
+    I -- Sim --> J[Registrar identificação correta ou incorreta]
+    J --> K{Última etapa?}
+    K -- Não --> D
+    K -- Sim --> L[Exibir resumo e salvar CSV]
