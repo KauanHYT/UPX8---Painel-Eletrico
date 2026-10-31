@@ -8,3 +8,5 @@ UserSettings/
 .vs/
 .utmp/
 *.apk
+*.keystore
+*.jks
