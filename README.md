@@ -42,7 +42,7 @@ O aplicativo é o instrumento da condição experimental de RA de um **estudo pi
 
 O estudo é feito exclusivamente em painel **desenergizado**, sem intervenção elétrica real. O conteúdo técnico será revisado por profissional da área antes do experimento; a versão atual do conteúdo (`0.1-provisoria`) **ainda não passou por essa revisão**.
 
-> **Estado atual:** o aplicativo está implementado e foi testado no computador, num painel virtual, com o **XR Simulation** do AR Foundation (Seção 22). Ainda **não foi testado em um smartphone**: o APK foi gerado, mas o aplicativo não chegou a rodar no aparelho disponível (Samsung Galaxy A56 5G). Esse modelo consta na lista oficial de aparelhos compatíveis com ARCore, e a causa está em investigação. O painel didático real também ainda não foi preparado.
+> **Estado atual:** o aplicativo está implementado e foi testado no computador, num painel virtual, com o **XR Simulation** do AR Foundation (Seção 22). Em 27/10/2026 o aplicativo também **rodou no smartphone** (Samsung Galaxy A56 5G), num teste preliminar com os marcadores exibidos na tela do computador: duas sessões completas de 15 etapas, com registro em CSV (Seção 22.2). Os testes formais com marcadores impressos e o painel didático real ainda não foram feitos.
 
 ![Painel virtual com os marcadores reconhecidos na simulação](docs/images/simulacao-painel.png)
 
@@ -106,7 +106,7 @@ Materiais complementares (perfil dos participantes, termo de consentimento, prot
 
 **Legenda:** ✅ Implementado · 🚧 Em desenvolvimento · ⬜ Planejado · ❌ Cancelado
 
-Todas as funcionalidades estão implementadas e foram verificadas no computador com o XR Simulation (Seção 22.1). A verificação em smartphone ainda não foi feita (Seção 22.2). Os conjuntos A e B, o SUS e a entrevista do estudo piloto estão planejados (Seção 11.5).
+Todas as funcionalidades estão implementadas e foram verificadas no computador com o XR Simulation (Seção 22.1). No smartphone, foram verificadas num teste preliminar com os marcadores exibidos na tela do computador (Seção 22.2); os testes formais estão na Seção 22.3. Os conjuntos A e B, o SUS e a entrevista do estudo piloto estão planejados (Seção 11.5).
 
 ---
 
@@ -114,9 +114,9 @@ Todas as funcionalidades estão implementadas e foram verificadas no computador 
 
 | ID | Categoria | Requisito | Situação |
 |---|---|---|---|
-| RNF01 | Plataforma | Executar em smartphones Android compatíveis com ARCore, sem acessórios adicionais | APK Android gerado (ARM64, IL2CPP, ARCore obrigatório); falta testar num aparelho |
+| RNF01 | Plataforma | Executar em smartphones Android compatíveis com ARCore, sem acessórios adicionais | APK Android (ARM64, IL2CPP, ARCore obrigatório) instalado e executado no Samsung Galaxy A56 5G |
 | RNF02 | Qualidade de rastreamento | Reconhecer corretamente os marcadores nas condições de iluminação, distância e ângulo do experimento, sem falsos reconhecimentos | Marcadores com nota ≥ 75 no arcoreimg; testes no celular pendentes |
-| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; medição no celular pendente |
+| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; 27 a 30 FPS no teste preliminar no celular; medição formal pendente |
 | RNF04 | Estabilidade | Completar uma sessão experimental sem falhas que exijam reinício da aplicação | Sessões completas na simulação; CSV gravado a cada evento |
 | RNF05 | Disponibilidade | Operar sem conexão com a internet, com o conteúdo armazenado localmente | Conteúdo empacotado no APK; teste em modo avião pendente |
 | RNF06 | Usabilidade | Textos legíveis à distância de uso e operação com uma das mãos | Fonte proporcional à tela e botões grandes na parte de baixo |
@@ -149,7 +149,7 @@ Todas as funcionalidades estão implementadas e foram verificadas no computador 
 
 | Equipamento | Modelo | Característica relevante | Utilização |
 |---|---|---|---|
-| Smartphone | Samsung Galaxy A56 5G (de um integrante) | Android; consta na lista oficial de aparelhos compatíveis com ARCore | Execução, testes e experimento (execução do app pendente) |
+| Smartphone | Samsung Galaxy A56 5G (de um integrante) | Android; consta na lista oficial de aparelhos compatíveis com ARCore | Execução, testes e experimento (app executado em 27/10/2026) |
 | Computador | MSI MS-7E06 | Windows 11 Pro, Intel Core i7-13700, 32 GB de RAM, NVIDIA GeForce RTX 4060 | Desenvolvimento, simulação e build |
 | Painel elétrico didático | Painel do laboratório da instituição (modelo a confirmar) | Desenergizado, com disjuntor, contator e relé de sobrecarga | Cenário do experimento |
 | Marcadores impressos | — | 3 imagens de 8 × 8 cm, papel fosco | Referências de rastreamento |
@@ -502,13 +502,23 @@ Próximo Participante → Tela Inicial
 
 ## 21. Interface
 
-Capturas disponíveis hoje (da simulação no computador, sem a interface do app por cima):
+Capturas disponíveis:
 
 ```text
 docs/images/
-├── simulacao-painel.png   # painel virtual com os 3 marcadores reconhecidos
-└── simulacao-etapa.png    # etapa com o marcador pedido destacado em laranja
+├── etapa-componente-na-mira.jpg  # smartphone: etapa 4 com o contator K1 na mira
+├── alerta-seguranca.jpg          # smartphone: alerta antes da etapa 6
+├── resumo-sessao.jpg             # smartphone: resumo de uma sessão de teste
+├── simulacao-painel.png          # simulação: painel virtual com os 3 marcadores reconhecidos
+├── simulacao-painel-mira.png     # simulação: painel virtual com a porta aberta e a mira
+└── simulacao-etapa.png           # simulação: marcador pedido destacado em laranja
 ```
+
+As capturas do smartphone são do teste preliminar de 27/10/2026, com os marcadores exibidos na tela do computador (Seção 22.2), e não do painel didático.
+
+| Etapa com o componente na mira | Alerta de segurança | Resumo da sessão |
+|---|---|---|
+| ![Etapa 4 com o contator K1 na mira, no smartphone](docs/images/etapa-componente-na-mira.jpg) | ![Alerta de segurança antes da etapa 6, no smartphone](docs/images/alerta-seguranca.jpg) | ![Resumo de uma sessão de teste, no smartphone](docs/images/resumo-sessao.jpg) |
 
 Telas do aplicativo:
 
@@ -519,16 +529,7 @@ Telas do aplicativo:
 | Etapa | Conduzir a identificação | Mira, destaque laranja no marcador pedido, título e instrução da etapa, cartão Na mira com nome, função e alerta, botão Confirmar componente, contador de FPS | Apontar a mira para o marcador e confirmar |
 | Resumo | Encerrar a sessão | Acertos, erros, taxa de erros, tempo e caminho do CSV, botão Próximo participante | Passar ao próximo participante |
 
-Capturas a adicionar (com a interface do app por cima):
-
-```text
-docs/images/
-├── tela-inicial.png
-├── alerta-seguranca.png
-├── etapa-componente-na-mira.png
-├── resumo-sessao.png
-└── painel-com-marcadores.jpg
-```
+Capturas a adicionar: `tela-inicial.jpg` (tela inicial no smartphone) e `painel-com-marcadores.jpg` (painel didático com os marcadores colados).
 
 ---
 
@@ -553,9 +554,24 @@ powershell -ExecutionPolicy Bypass -File tools\unity.ps1 TesteSimulacao.Executar
 
 A simulação verifica a lógica do aplicativo, mas não processa a imagem da câmera. Por isso não substitui os testes abaixo.
 
-### 22.2 Testes no smartphone e no painel didático
+### 22.2 Teste preliminar no smartphone (27/10/2026)
 
-Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Realizados no painel didático, com o smartphone do experimento.
+Teste feito pela equipe no Samsung Galaxy A56 5G, com os marcadores exibidos na tela do computador (arquivo de impressão aberto no monitor), e não impressos nem colados no painel. Não houve participantes: os códigos P01 e P02 foram usados só para teste.
+
+| Verificação | Resultado observado | Status |
+|---|---|---|
+| Instalação e execução do APK | O aplicativo foi instalado, abriu a câmera e iniciou a sessão | ✅ |
+| Reconhecimento e associação | Os 3 marcadores foram reconhecidos na tela; o cartão **Na mira** mostrou o componente correspondente | ✅ |
+| Alertas de segurança | Alertas exibidos antes das etapas críticas (por exemplo, etapas 6 e 15) | ✅ |
+| Sessões completas | 2 sessões de 15 etapas sem travamento: P01 com 10 acertos, 5 erros (33,3 %) e 163 s; P02 com 15 acertos, 0 erros (0,0 %) e 38 s | ✅ |
+| Registro de dados | CSV salvo no armazenamento do app (por exemplo, `P02_RA_20261027_062824.csv`) | ✅ |
+| Desempenho | 27 a 30 FPS no contador da tela | ✅ |
+
+Observação: com os marcadores na tela do monitor, o tamanho real deles não é de 8 cm. Por isso, os rótulos 3D apareceram maiores e deslocados (por exemplo, "Disjuntor geral DJ1" no topo da tela de resumo). O posicionamento dos rótulos precisa ser conferido com os marcadores impressos no tamanho correto.
+
+### 22.3 Testes formais no smartphone e no painel didático
+
+Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Realizados no painel didático, com os marcadores impressos e o smartphone do experimento.
 
 | Teste | Procedimento | Resultado esperado | Resultado obtido | Status |
 |---|---|---|---|---|
@@ -575,7 +591,7 @@ Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Real
 | Dispositivo | Sistema | Versão | Resultado |
 |---|---|---|---|
 | Computador (XR Simulation no editor Unity) | Windows 11 Pro | Unity 6000.6.7f1 | Sessões completas sem falha (Seção 22.1) |
-| Samsung Galaxy A56 5G (de um integrante) | Android | — | APK gerado; o aplicativo ainda não rodou no aparelho. O modelo consta na lista oficial do ARCore; causa em investigação |
+| Samsung Galaxy A56 5G (de um integrante) | Android | — | Aplicativo executado; 2 sessões completas no teste preliminar, a 27–30 FPS (Seção 22.2). Testes formais pendentes (Seção 22.3) |
 
 ---
 
@@ -589,7 +605,7 @@ Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Real
 - Mudanças no conteúdo exigem novo build, porque o JSON é empacotado dentro do APK.
 - O conteúdo técnico do arquivo `conteudo_painel.json` é provisório até a validação pelo profissional da área.
 - O aplicativo reconhece o **marcador** colado ao lado do componente, e não o componente: na simulação, foi natural mirar no próprio componente. As instruções padrão aos participantes precisam deixar isso claro.
-- Até agora, os testes foram feitos só na simulação, que não processa imagem real.
+- Até agora, os testes foram feitos na simulação e num teste preliminar no smartphone com os marcadores na tela do computador; faltam os testes com marcadores impressos no painel didático.
 - A nota exata de cada marcador no arcoreimg não é conhecida; sabe-se apenas que ficou ≥ 75.
 - Algumas instruções do conteúdo provisório não citam o componente (por exemplo, a etapa 3). No app, o destaque laranja compensa; no manual, a coluna "Componente" traz o nome. Vale revisar com o profissional.
 
@@ -600,12 +616,13 @@ Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Real
 Disponíveis:
 
 - capturas do painel virtual na simulação (Seção 21);
+- capturas das telas de etapa, alerta e resumo no smartphone, do teste preliminar (Seções 21 e 22.2);
 - foto provisória do painel virtual com os componentes indicados (`docs/impressao/foto_painel.jpg`);
 - manual impresso, ficha de observação e folha dos marcadores em `docs/impressao/`.
 
 Pendentes:
 
-- captura de tela de cada tela do aplicativo no smartphone (Seção 21);
+- captura da tela inicial no smartphone (Seção 21);
 - foto do painel didático com os marcadores colados;
 - vídeo da experiência RA durante uma sessão completa;
 - CSVs anonimizados das sessões de teste em `docs/documents/`.
@@ -636,11 +653,11 @@ Estimativa de 6 semanas e cerca de 100 horas de trabalho da equipe.
 | Revisão bibliográfica | Equipe | ✅ |
 | Definição do painel, componentes e procedimento | Equipe | 🚧 (procedimento provisório; painel real a definir) |
 | Validação técnica do conteúdo por profissional | Equipe | ⬜ |
-| Protótipos de interface | Kauan | ⬜ (telas implementadas; capturas e figura pendentes) |
+| Protótipos de interface | Kauan | 🚧 (telas implementadas e capturadas no smartphone; figura pendente) |
 | Implementação da aplicação | Enrico e Kauan | 🚧 (implementada e verificada na simulação; JSON do painel real pendente) |
-| Integração do reconhecimento de marcadores | Enrico e Kauan | 🚧 (verificada na simulação; smartphone pendente) |
+| Integração do reconhecimento de marcadores | Enrico e Kauan | 🚧 (verificada na simulação e no smartphone com marcadores na tela; painel pendente) |
 | Materiais da condição papel e script de análise | Equipe | ✅ |
-| Testes técnicos | Enrico e Kauan | 🚧 (feitos na simulação; smartphone pendente) |
+| Testes técnicos | Enrico e Kauan | 🚧 (simulação e teste preliminar no smartphone; testes formais pendentes) |
 | Protocolo experimental | Guilherme | ⬜ |
 | Coleta e análise dos dados | Equipe | ⬜ |
 | Versão final do artigo | Equipe | ⬜ |
@@ -697,9 +714,9 @@ O repositório oficial é https://github.com/KauanHYT/UPX8---Painel-Eletrico. O 
 
 **Sintoma:** o APK foi gerado, mas o aplicativo não executou no Samsung Galaxy A56 5G de um integrante.
 
-**Causa:** em investigação. A falha foi atribuída inicialmente à falta de suporte ao ARCore, mas o modelo consta na lista oficial de aparelhos compatíveis do Google. Hipóteses a verificar: Google Play Services for AR ausente ou desatualizado, permissão de câmera negada e falha na instalação do APK.
+**Causa:** a falha foi atribuída inicialmente à falta de suporte ao ARCore, mas o modelo consta na lista oficial de aparelhos compatíveis do Google.
 
-**Solução provisória:** testes no computador com XR Simulation e um painel virtual completo; os testes no smartphone aguardam a correção.
+**Solução:** resolvido. Em 27/10/2026 o aplicativo rodou no aparelho e completou duas sessões de teste (Seção 22.2).
 
 ### Comandos do Unity em linha de comando não abriam o projeto
 
