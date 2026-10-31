@@ -2,6 +2,9 @@
 
 Evolução do Painel AR, a partir do histórico de commits do repositório.
 
+## Não lançado
+- docs: teste preliminar no smartphone (Samsung Galaxy A56 5G, 27/10/2026) registrado no README; capturas das telas de etapa, alerta e resumo em `docs/images/`.
+
 ## v0.1-simulacao — 2026-10-31
 - docs: README reescrito no modelo da disciplina, no enquadramento de estudo piloto, com controle de versão, testes e limitações.
 - docs: diagramas de arquitetura, fluxo e caso de uso em `docs/diagrams/`; pasta `docs/documents/` para o artigo e os instrumentos de coleta.
