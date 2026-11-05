@@ -30,6 +30,8 @@ namespace PainelAR.EditorTools
         static double _inicio, _desde;
         static string _alvo;
         static bool _imagemEtapaSalva;
+        static readonly string[] Conjuntos = { "A", "B" };
+        static int _conjuntoAtual;
 
         static TesteSimulacao()
         {
@@ -76,7 +78,7 @@ namespace PainelAR.EditorTools
                 }
                 case Passo.Mirando:
                 {
-                    if (app.FaseAtual == Fase.Concluido) { Concluir(app); return; }
+                    if (app.FaseAtual == Fase.Concluido) { Concluir(app, agora); return; }
                     if (app.FaseAtual == Fase.Alerta) { app.ConfirmarAlerta(); return; }
                     var etapa = app.EtapaAtual;
                     string componente = etapa.componenteId;
@@ -103,7 +105,7 @@ namespace PainelAR.EditorTools
         static void IrPara(Passo passo, double agora) { _passo = passo; _desde = agora; }
 
         // Põe a câmera simulada a 40 cm do marcador, com ele exatamente na mira (62% da altura da tela)
-        static bool Mirar(ARTrackedImageManager gerenciador, string marcador)
+        internal static bool Mirar(ARTrackedImageManager gerenciador, string marcador)
         {
             ARTrackedImage imagem = null;
             foreach (var i in gerenciador.trackables) if (i.referenceImage.name == marcador) imagem = i;
@@ -121,23 +123,37 @@ namespace PainelAR.EditorTools
             return true;
         }
 
-        static void Concluir(ProcedimentoController app)
+        static void Concluir(ProcedimentoController app, double agora)
         {
             int errosEsperados = ErrosPropositais.Length;
             var linhas = File.ReadAllLines(app.CaminhoArquivo);
-            var identificacoes = linhas.Where(l => l.Split(';')[4] == "IDENTIFICACAO").ToArray();
-            int zerosCsv = identificacoes.Count(l => l.Split(';')[8] == "0");
-            var errosCsv = string.Join(",", identificacoes.Where(l => l.Split(';')[8] == "0").Select(l => l.Split(';')[5]));
+            var identificacoes = linhas.Where(l => l.Split(';')[5] == "IDENTIFICACAO").ToArray();
+            int zerosCsv = identificacoes.Count(l => l.Split(';')[9] == "0");
+            var errosCsv = string.Join(",", identificacoes.Where(l => l.Split(';')[9] == "0").Select(l => l.Split(';')[6]));
 
-            Debug.Log("[PainelAR] TESTE: acertos " + app.Acertos + ", erros " + app.Erros + ", taxa " + app.TaxaErros.ToString("F1") +
+            Debug.Log("[PainelAR] TESTE conjunto " + app.ConjuntoId + ": acertos " + app.Acertos + ", erros " + app.Erros + ", taxa " + app.TaxaErros.ToString("F1") +
                 "%, CSV com " + identificacoes.Length + " identificações (erros nas etapas " + errosCsv + ")");
             Directory.CreateDirectory("Logs");
-            File.Copy(app.CaminhoArquivo, "Logs/teste_simulacao.csv", true);
+            File.Copy(app.CaminhoArquivo, "Logs/teste_simulacao_" + app.ConjuntoId + ".csv", true);
 
             bool ok = app.Erros == errosEsperados && app.Acertos == app.TotalEtapas - errosEsperados
                 && identificacoes.Length == app.TotalEtapas && zerosCsv == errosEsperados
-                && errosCsv == string.Join(",", ErrosPropositais);
-            Encerrar(ok, ok ? "sessão de " + app.TotalEtapas + " etapas registrada corretamente" : "resultado diferente do esperado");
+                && errosCsv == string.Join(",", ErrosPropositais)
+                && linhas.Skip(1).All(l => l.Split(';')[2] == app.ConjuntoId);
+            if (!ok) { Falhar("conjunto " + app.ConjuntoId + ": resultado diferente do esperado"); return; }
+
+            if (++_conjuntoAtual < Conjuntos.Length)
+            {
+                app.ProximoParticipante();
+                app.ConjuntoId = Conjuntos[_conjuntoAtual];
+                app.IniciarSessao();
+                IrPara(Passo.Mirando, agora);
+                return;
+            }
+
+            var rodizio = string.Concat(Enumerable.Range(1, 4).Select(ProcedimentoController.ConjuntoSugerido));
+            if (rodizio != "AABB") { Falhar("rodízio de conjuntos inesperado: " + rodizio); return; }
+            Encerrar(true, "sessões dos conjuntos A e B registradas corretamente");
         }
 
         static void Falhar(string motivo) => Encerrar(false, motivo);

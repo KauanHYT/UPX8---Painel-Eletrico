@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace PainelAR
@@ -9,7 +10,7 @@ namespace PainelAR
         public string titulo;
         public string versao;
         public Componente[] componentes;
-        public Etapa[] etapas;
+        public ConjuntoEtapas[] conjuntos;
 
         public Componente BuscarPorId(string id)
         {
@@ -23,6 +24,12 @@ namespace PainelAR
             return null;
         }
 
+        public ConjuntoEtapas BuscarConjunto(string id)
+        {
+            foreach (var c in conjuntos) if (c.id == id) return c;
+            return null;
+        }
+
         // Lê Assets/Resources/conteudo_painel.json
         public static ConteudoPainel Carregar()
         {
@@ -31,14 +38,47 @@ namespace PainelAR
                 throw new Exception("Não encontrei Assets/Resources/conteudo_painel.json");
 
             var conteudo = JsonUtility.FromJson<ConteudoPainel>(arquivo.text);
-            if (conteudo == null || conteudo.componentes == null || conteudo.etapas == null || conteudo.etapas.Length == 0)
+            if (conteudo == null || conteudo.componentes == null || conteudo.conjuntos == null)
                 throw new Exception("conteudo_painel.json está vazio ou com erro de formato");
 
-            foreach (var etapa in conteudo.etapas)
-                if (conteudo.BuscarPorId(etapa.componenteId) == null)
-                    throw new Exception("Etapa " + etapa.numero + ": componente '" + etapa.componenteId + "' não existe no JSON");
+            var a = conteudo.BuscarConjunto("A");
+            var b = conteudo.BuscarConjunto("B");
+            if (a == null || b == null || conteudo.conjuntos.Length != 2)
+                throw new Exception("conteudo_painel.json precisa ter exatamente os conjuntos A e B");
+
+            foreach (var conjunto in conteudo.conjuntos)
+            {
+                if (conjunto.etapas == null || conjunto.etapas.Length == 0)
+                    throw new Exception("Conjunto " + conjunto.id + " sem etapas");
+                for (int i = 0; i < conjunto.etapas.Length; i++)
+                {
+                    var etapa = conjunto.etapas[i];
+                    if (etapa.numero != i + 1)
+                        throw new Exception("Conjunto " + conjunto.id + ": etapa na posição " + (i + 1) + " está numerada como " + etapa.numero);
+                    if (conteudo.BuscarPorId(etapa.componenteId) == null)
+                        throw new Exception("Conjunto " + conjunto.id + ", etapa " + etapa.numero + ": componente '" + etapa.componenteId + "' não existe no JSON");
+                }
+            }
+
+            // Tarefas equivalentes nas duas condições (Seção 3.5 do artigo)
+            if (a.Perfil() != b.Perfil())
+                throw new Exception("Conjuntos A e B não são equivalentes: " + a.Perfil() + " x " + b.Perfil());
 
             return conteudo;
+        }
+    }
+
+    [Serializable]
+    public class ConjuntoEtapas
+    {
+        public string id;
+        public Etapa[] etapas;
+
+        // Etapas por componente e total de alertas. Precisa ser igual nos dois conjuntos.
+        public string Perfil()
+        {
+            var porComponente = etapas.GroupBy(e => e.componenteId).OrderBy(g => g.Key, StringComparer.Ordinal).Select(g => g.Key + "=" + g.Count());
+            return string.Join(", ", porComponente) + ", alertas=" + etapas.Count(e => !string.IsNullOrEmpty(e.alerta));
         }
     }
 

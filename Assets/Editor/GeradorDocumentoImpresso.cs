@@ -21,13 +21,18 @@ namespace PainelAR.EditorTools
         public static void Gerar()
         {
             var c = ConteudoPainel.Carregar();
+            foreach (var conjunto in c.conjuntos) GerarManual(c, conjunto);
+        }
+
+        static void GerarManual(ConteudoPainel c, ConjuntoEtapas conjunto)
+        {
             var sb = new StringBuilder();
             sb.Append("<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><title>").Append(H(c.titulo)).Append("</title>");
             sb.Append("<style>body{font-family:Arial,sans-serif;margin:1.5cm;font-size:12pt}h1{font-size:18pt}");
             sb.Append("table{border-collapse:collapse;width:100%;margin-bottom:1cm}td,th{border:1px solid #444;padding:6px;text-align:left;vertical-align:top}");
             sb.Append(".alerta{color:#a00;font-weight:bold}.ok{width:1.2cm}img{max-width:100%;margin-bottom:1cm}");
             sb.Append("@page{size:A4;margin:1.2cm}body{margin:0}tr{page-break-inside:avoid}</style></head><body>");
-            sb.Append("<h1>").Append(H(c.titulo)).Append("</h1><p>Versão do conteúdo: ").Append(H(c.versao)).Append("</p>");
+            sb.Append("<h1>").Append(H(c.titulo)).Append(" — Conjunto ").Append(H(conjunto.id)).Append("</h1><p>Versão do conteúdo: ").Append(H(c.versao)).Append("</p>");
 
             // Foto do painel com os componentes indicados (Painel AR → Gerar foto do painel)
             if (File.Exists(Path.Combine(Pasta, Foto))) sb.Append("<img src='").Append(Foto).Append("'>");
@@ -39,7 +44,7 @@ namespace PainelAR.EditorTools
             sb.Append("</table>");
 
             sb.Append("<h2>Procedimento</h2><table><tr><th>Etapa</th><th>Componente</th><th>Instrução</th><th>Alerta</th><th class='ok'>OK</th></tr>");
-            foreach (var e in c.etapas)
+            foreach (var e in conjunto.etapas)
             {
                 var k = c.BuscarPorId(e.componenteId);
                 sb.Append("<tr><td>").Append(e.numero).Append(". ").Append(H(e.titulo)).Append("</td><td>").Append(H(k.nome))
@@ -47,7 +52,7 @@ namespace PainelAR.EditorTools
             }
             sb.Append("</table></body></html>");
 
-            Salvar("Documentacao_Impressa.html", sb.ToString());
+            Salvar("Documentacao_Impressa_" + conjunto.id + ".html", sb.ToString());
         }
 
         // Ficha do pesquisador na condição papel: o participante indica, o pesquisador marca.
@@ -56,13 +61,18 @@ namespace PainelAR.EditorTools
         public static void GerarFichaObservacao()
         {
             var c = ConteudoPainel.Carregar();
+            foreach (var conjunto in c.conjuntos) GerarFicha(c, conjunto);
+        }
+
+        static void GerarFicha(ConteudoPainel c, ConjuntoEtapas conjunto)
+        {
             var sb = new StringBuilder();
             sb.Append("<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><title>Ficha de observação</title>");
             sb.Append("<style>@page{size:A4;margin:1.2cm}body{font-family:Arial,sans-serif;font-size:10.5pt;margin:0}h1{font-size:15pt;margin:0 0 2mm}");
             sb.Append(".aviso{color:#a00;font-weight:bold;margin:0 0 3mm}.campos{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm 8mm;margin-bottom:4mm}");
             sb.Append(".campo{border-bottom:1px solid #444;padding-top:4mm}table{border-collapse:collapse;width:100%}td,th{border:1px solid #444;padding:4px 5px;text-align:left}");
             sb.Append("th{background:#eee}.c{text-align:center;white-space:nowrap}.obs{width:28%}</style></head><body>");
-            sb.Append("<h1>Ficha de observação — condição documentação impressa</h1>");
+            sb.Append("<h1>Ficha de observação — condição documentação impressa — Conjunto ").Append(H(conjunto.id)).Append("</h1>");
             sb.Append("<p class='aviso'>Uso do pesquisador. Não entregar ao participante: a coluna \"Solicitado\" é o gabarito.</p>");
             sb.Append("<div class='campos'>");
             foreach (var campo in new[] { "Participante (código, ex.: P01)", "Data", "Ordem: ( ) papel primeiro  ( ) RA primeiro",
@@ -74,21 +84,21 @@ namespace PainelAR.EditorTools
             string opcoes = "";
             foreach (var k in c.componentes) opcoes += "( ) " + H(k.id) + "&nbsp;&nbsp;";
             opcoes += "( ) outro";
-            foreach (var e in c.etapas)
+            foreach (var e in conjunto.etapas)
                 sb.Append("<tr><td>").Append(e.numero).Append(". ").Append(H(e.titulo)).Append("</td><td class='c'>").Append(H(e.componenteId))
                   .Append("</td><td class='c'>").Append(opcoes).Append("</td><td></td></tr>");
-            sb.Append("</table><p>Conteúdo ").Append(H(c.versao)).Append(". Depois da sessão, passe as respostas para o modelo_papel.csv (docs/ANALISE.md).</p></body></html>");
-            Salvar("Ficha_Observacao_Papel.html", sb.ToString());
+            sb.Append("</table><p>Conteúdo ").Append(H(c.versao)).Append(". Depois da sessão, passe as respostas para o modelo_papel_").Append(H(conjunto.id)).Append(".csv (docs/ANALISE.md).</p></body></html>");
+            Salvar("Ficha_Observacao_Papel_" + conjunto.id + ".html", sb.ToString());
 
             // Modelo de CSV com as mesmas colunas do app (Parte 11.4), já com as etapas e o gabarito
-            var csv = new StringBuilder("participante;condicao;data_hora;tempo_s;evento;etapa;componente_solicitado;componente_indicado;correto;detalhe\n");
-            csv.Append("Pxx;PAPEL;;0;SESSAO_INICIO;;;;;conteudo ").Append(c.versao).Append('\n');
-            foreach (var e in c.etapas)
-                csv.Append("Pxx;PAPEL;;;IDENTIFICACAO;").Append(e.numero).Append(';').Append(e.componenteId).Append(";;;\n");
-            csv.Append("Pxx;PAPEL;;;SESSAO_FIM;;;;;\n");
+            var csv = new StringBuilder("participante;condicao;conjunto;data_hora;tempo_s;evento;etapa;componente_solicitado;componente_indicado;correto;detalhe\n");
+            csv.Append("Pxx;PAPEL;").Append(conjunto.id).Append(";;0;SESSAO_INICIO;;;;;conteudo ").Append(c.versao).Append('\n');
+            foreach (var e in conjunto.etapas)
+                csv.Append("Pxx;PAPEL;").Append(conjunto.id).Append(";;;IDENTIFICACAO;").Append(e.numero).Append(';').Append(e.componenteId).Append(";;;\n");
+            csv.Append("Pxx;PAPEL;").Append(conjunto.id).Append(";;;SESSAO_FIM;;;;;\n");
             Directory.CreateDirectory("docs/analise");
-            File.WriteAllText("docs/analise/modelo_papel.csv", csv.ToString(), new UTF8Encoding(true));
-            Debug.Log("[PainelAR] Modelo de CSV da condição papel em docs/analise/modelo_papel.csv");
+            File.WriteAllText("docs/analise/modelo_papel_" + conjunto.id + ".csv", csv.ToString(), new UTF8Encoding(true));
+            Debug.Log("[PainelAR] Modelo de CSV da condição papel em docs/analise/modelo_papel_" + conjunto.id + ".csv");
         }
 
         // Foto frontal do painel virtual com legendas apontando cada componente.

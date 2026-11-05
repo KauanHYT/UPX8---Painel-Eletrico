@@ -1,6 +1,6 @@
 ﻿# Calcula a taxa de erros de identificação por participante e por condição (Seção 3.10 do artigo).
 # Lê todos os .csv de uma pasta: os do app (condicao = RA) e os preenchidos a partir do
-# docs/analise/modelo_papel.csv (condicao = PAPEL). Mesmas colunas nos dois (Parte 11 do guia).
+# docs/analise/modelo_papel_A.csv ou _B.csv (condicao = PAPEL). Mesmas colunas nos dois (Parte 11 do guia).
 # Uso:  powershell -ExecutionPolicy Bypass -File tools\analisar.ps1 -Pasta C:\AR\dados
 # Gera <Pasta>\resultados\resumo.csv e comparativo.csv (separador ";", abrem direto no Excel).
 param(
@@ -26,6 +26,8 @@ foreach ($arquivo in $arquivos) {
 
     $participante = $idents[0].participante
     $condicao = $idents[0].condicao
+    $conjunto = $idents[0].conjunto
+    if ([string]::IsNullOrWhiteSpace($conjunto)) { Write-Warning "$($arquivo.Name): sem a coluna conjunto (CSV de versão antiga do app?)" }
     if ($participante -eq 'Pxx') { Write-Warning "$($arquivo.Name): código do participante não preenchido (Pxx)" }
 
     $erros = 0; $semResposta = 0
@@ -47,6 +49,7 @@ foreach ($arquivo in $arquivos) {
     $sessoes += [pscustomobject]@{
         participante  = $participante
         condicao      = $condicao
+        conjunto      = $conjunto
         identificacoes = $total
         acertos       = $total - $erros
         erros         = $erros
@@ -60,10 +63,10 @@ $saida = Join-Path $Pasta 'resultados'
 New-Item -ItemType Directory -Force $saida | Out-Null
 
 $sessoes = $sessoes | Sort-Object participante, condicao
-$sessoes | Format-Table participante, condicao, identificacoes, acertos, erros, taxa_erros, tempo_s -AutoSize | Out-String | Write-Host
+$sessoes | Format-Table participante, condicao, conjunto, identificacoes, acertos, erros, taxa_erros, tempo_s -AutoSize | Out-String | Write-Host
 $sessoes | ForEach-Object {
     [pscustomobject]@{
-        participante = $_.participante; condicao = $_.condicao; identificacoes = $_.identificacoes
+        participante = $_.participante; condicao = $_.condicao; conjunto = $_.conjunto; identificacoes = $_.identificacoes
         acertos = $_.acertos; erros = $_.erros
         taxa_erros = if ($_.taxa_erros -ne $null) { $_.taxa_erros.ToString('0.0', $ptBR) } else { '' }
         tempo_s = if ($_.tempo_s -ne $null) { $_.tempo_s.ToString('0.0', $ptBR) } else { '' }
@@ -76,8 +79,11 @@ $comparativo = $sessoes | Group-Object participante | ForEach-Object {
     $ra = $_.Group | Where-Object condicao -eq 'RA' | Select-Object -First 1
     $papel = $_.Group | Where-Object condicao -eq 'PAPEL' | Select-Object -First 1
     $dif = if ($ra -and $papel) { $ra.taxa_erros - $papel.taxa_erros } else { $null }
+    if ($ra -and $papel -and $ra.conjunto -and $ra.conjunto -eq $papel.conjunto) { Write-Warning "$($_.Name): usou o conjunto $($ra.conjunto) nas duas condições" }
     [pscustomobject]@{
         participante        = $_.Name
+        conjunto_RA         = if ($ra) { $ra.conjunto } else { '' }
+        conjunto_PAPEL      = if ($papel) { $papel.conjunto } else { '' }
         taxa_erros_RA       = if ($ra) { $ra.taxa_erros.ToString('0.0', $ptBR) } else { '' }
         taxa_erros_PAPEL    = if ($papel) { $papel.taxa_erros.ToString('0.0', $ptBR) } else { '' }
         diferenca_RA_menos_PAPEL = if ($dif -ne $null) { $dif.ToString('0.0', $ptBR) } else { '' }
@@ -94,5 +100,11 @@ foreach ($grupo in ($sessoes | Group-Object condicao)) {
     $e = ($grupo.Group | Measure-Object erros -Sum).Sum
     $t = ($grupo.Group | Measure-Object identificacoes -Sum).Sum
     Write-Host ("{0}: {1} erro(s) em {2} identificações = {3}% ({4} participante(s))" -f $grupo.Name, $e, $t, (100.0 * $e / $t).ToString('0.0', $ptBR), $grupo.Count)
+}
+# Mesma conta por conjunto, para ver se um deles saiu mais difícil que o outro
+foreach ($grupo in ($sessoes | Where-Object conjunto | Group-Object conjunto)) {
+    $e = ($grupo.Group | Measure-Object erros -Sum).Sum
+    $t = ($grupo.Group | Measure-Object identificacoes -Sum).Sum
+    Write-Host ("Conjunto {0}: {1} erro(s) em {2} identificações = {3}%" -f $grupo.Name, $e, $t, (100.0 * $e / $t).ToString('0.0', $ptBR))
 }
 Write-Host "Arquivos gerados em $saida"

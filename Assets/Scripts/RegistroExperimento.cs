@@ -12,17 +12,19 @@ namespace PainelAR
         public float TempoDecorrido => Time.realtimeSinceStartup - _inicio;
 
         readonly string _participante;
+        readonly string _conjunto;
         readonly float _inicio;
 
-        public RegistroExperimento(string participante)
+        public RegistroExperimento(string participante, string conjunto)
         {
             _participante = participante;
+            _conjunto = conjunto;
             _inicio = Time.realtimeSinceStartup;
-            string nome = participante + "_RA_" + DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture) + ".csv";
+            string nome = participante + "_RA_" + conjunto + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture) + ".csv";
             CaminhoArquivo = Path.Combine(Application.persistentDataPath, nome);
             // UTF-8 com BOM para o Excel mostrar os acentos corretamente
             File.WriteAllText(CaminhoArquivo,
-                "participante;condicao;data_hora;tempo_s;evento;etapa;componente_solicitado;componente_indicado;correto;detalhe\n",
+                "participante;condicao;conjunto;data_hora;tempo_s;evento;etapa;componente_solicitado;componente_indicado;correto;detalhe\n",
                 new UTF8Encoding(true));
         }
 
@@ -34,6 +36,7 @@ namespace PainelAR
             {
                 _participante,
                 "RA",
+                _conjunto,
                 DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
                 tempo,
                 evento,
