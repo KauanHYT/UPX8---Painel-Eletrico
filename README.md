@@ -1,7 +1,7 @@
 # Painel AR — Identificação de Componentes em Painéis Elétricos
 
 > **UPX — Realidade Aumentada · Centro Universitário Facens**  
-> Prova de conceito de aplicativo Android de Realidade Aumentada baseada em marcadores para apoiar a identificação de componentes e a execução guiada de um procedimento de manutenção em um painel elétrico didático desenergizado, avaliada por meio de um estudo piloto de viabilidade.
+> Prova de conceito de aplicativo Android de Realidade Aumentada baseada em marcadores para apoiar a identificação de componentes e a execução guiada de um procedimento de manutenção em um painel elétrico, avaliada por meio de um estudo piloto de viabilidade com um painel virtual exibido em tela.
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![Plataforma](https://img.shields.io/badge/plataforma-Android%20(ARCore)-green)
@@ -36,13 +36,13 @@
 
 Operadores em treinamento e técnicos menos experientes costumam depender de manuais impressos, etiquetas ou memória para localizar o componente certo de um painel elétrico antes de um procedimento de manutenção, e um erro de identificação aumenta o risco da atividade.
 
-Para apoiar essa identificação, o **Painel AR** é um aplicativo Android de Realidade Aumentada que reconhece marcadores impressos colados ao lado dos componentes de um painel elétrico didático. Ao apontar a câmera para um marcador, o aplicativo mostra o nome do componente, sua função e alertas de segurança, e conduz o usuário por um procedimento de manutenção simulado de 15 etapas.
+Para apoiar essa identificação, o **Painel AR** é um aplicativo Android de Realidade Aumentada que reconhece marcadores impressos colados ao lado dos componentes de um painel elétrico. Nos testes, o painel é um painel virtual exibido na tela de um computador, com os marcadores impressos fixados ao lado de cada componente. Ao apontar a câmera para um marcador, o aplicativo mostra o nome do componente, sua função e alertas de segurança, e conduz o usuário por um procedimento de manutenção simulado de 15 etapas.
 
 O aplicativo é o instrumento da condição experimental de RA de um **estudo piloto de viabilidade**, descrito no artigo científico da equipe. Durante a tarefa, ele registra cada identificação feita pelo participante e calcula a **taxa de erros de identificação**, que é comparada com o uso de documentação impressa de conteúdo equivalente. O piloto verifica se o protocolo e o aplicativo funcionam nas condições do experimento e produz evidências preliminares, sem pretensão de demonstrar eficácia generalizável.
 
-O estudo é feito exclusivamente em painel **desenergizado**, sem intervenção elétrica real. O conteúdo técnico será revisado por profissional da área antes do experimento; a versão atual do conteúdo (`0.1-provisoria`) **ainda não passou por essa revisão**.
+Não há intervenção elétrica real: como não foi possível usar um painel físico, os testes usam um painel virtual exibido em tela. O conteúdo técnico (versão `0.2-provisoria`) foi elaborado pela equipe e **não foi validado por profissional da área**.
 
-> **Estado atual:** o aplicativo está implementado e foi testado no computador, num painel virtual, com o **XR Simulation** do AR Foundation (Seção 22). Em 27/10/2026 o aplicativo também **rodou no smartphone** (Samsung Galaxy A56 5G), num teste preliminar com os marcadores exibidos na tela do computador: duas sessões completas de 15 etapas, com registro em CSV (Seção 22.2). Os testes formais com marcadores impressos e o painel didático real ainda não foram feitos.
+> **Estado atual:** o aplicativo está implementado, com os conjuntos de etapas A e B e o rodízio dos participantes. Foi testado no computador com o **XR Simulation** do AR Foundation (Seção 22.1), num teste preliminar no smartphone em 27/10/2026 (Seção 22.2) e nos testes técnicos de 07/11/2026, feitos remotamente com o painel virtual em tela e os marcadores impressos em 8 × 8 cm (Seção 22.3). Nesses testes, o reconhecimento, a associação, o desempenho, a estabilidade, a operação offline e o registro de dados atenderam aos critérios; o reconhecimento por distância funciona até cerca de 40 cm com marcadores de 8 cm.
 
 ![Painel virtual com os marcadores reconhecidos na simulação](docs/images/simulacao-painel.png)
 
@@ -54,7 +54,7 @@ Atividades de manutenção elétrica expõem o trabalhador a riscos como choque 
 
 A RA já é aplicada em manutenção industrial, mas, nos trabalhos analisados pela equipe, não foi encontrada uma avaliação experimental que compare uma aplicação de RA real, baseada em marcadores, com documentação impressa equivalente quanto à taxa de erros de identificação em um painel elétrico físico.
 
-**Questão de pesquisa (RQ1):** qual é o efeito do uso de uma aplicação de RA baseada em marcadores, em comparação ao uso de documentação tradicional impressa, sobre a taxa de erros de identificação de componentes durante a execução de um procedimento de manutenção em um painel elétrico didático?
+**Questão de pesquisa (RQ1):** qual é o efeito do uso de uma aplicação de RA baseada em marcadores, em comparação ao uso de documentação tradicional impressa, sobre a taxa de erros de identificação de componentes durante a execução de um procedimento de manutenção em um painel elétrico simulado?
 
 **Hipótese (H1):** usuários que utilizam a aplicação de RA apresentarão menor taxa de erros na identificação dos componentes do que usuários que utilizam documentação impressa.
 
@@ -66,7 +66,7 @@ Por se tratar de um estudo piloto com amostra reduzida, a H1 é explorada de for
 
 ### 4.1 Objetivo Geral
 
-Desenvolver e avaliar, por meio de um estudo piloto de viabilidade, uma prova de conceito de aplicação móvel de Realidade Aumentada baseada em marcadores para apoiar a identificação de componentes e a execução guiada de um procedimento de manutenção em um painel elétrico didático desenergizado.
+Desenvolver e avaliar, por meio de um estudo piloto de viabilidade, uma prova de conceito de aplicação móvel de Realidade Aumentada baseada em marcadores para apoiar a identificação de componentes e a execução guiada de um procedimento de manutenção em um painel elétrico simulado, sem intervenção elétrica real.
 
 ### 4.2 Objetivos Técnicos
 
@@ -85,7 +85,7 @@ Desenvolver e avaliar, por meio de um estudo piloto de viabilidade, uma prova de
 
 Operadores em treinamento, estudantes de cursos técnicos e de engenharia e profissionais menos experientes que precisam identificar componentes de um painel elétrico antes de executar um procedimento de manutenção.
 
-No estudo piloto, participam de 2 a 4 voluntários, com registro da familiaridade prévia de cada um com componentes e procedimentos de manutenção elétrica (campo da ficha de observação, Seção 11.5). Cada participante realiza as duas condições (RA e documentação impressa), com a ordem alternada entre participantes. Os critérios de inclusão e exclusão serão definidos no protocolo experimental.
+No estudo piloto, participam de 2 a 4 voluntários, com registro da familiaridade prévia de cada um com componentes e procedimentos de manutenção elétrica (campo da ficha de observação, Seção 11.5). Cada participante realiza as duas condições (RA e documentação impressa), com a ordem e o conjunto de etapas alternados entre participantes (Seção 11.5). Participam adultos (18 anos ou mais), estudantes, sem atuação profissional em manutenção de painéis elétricos e que não integram a equipe.
 
 Materiais complementares (perfil dos participantes, termo de consentimento, protocolo do experimento) ficam em `docs/documents/`.
 
@@ -95,18 +95,18 @@ Materiais complementares (perfil dos participantes, termo de consentimento, prot
 
 | ID | Funcionalidade | Descrição | Status | Verificado em |
 |---|---|---|---|---|
-| RF01 | Acessar o painel pela câmera | Abre a câmera em modo RA e inicia a sessão do participante | ✅ | Simulação no PC |
-| RF02 | Reconhecer marcadores | Reconhece os 3 marcadores cadastrados na Reference Image Library | ✅ | Simulação no PC |
-| RF03 | Identificar o componente | O participante aponta a mira para um marcador e confirma | ✅ | Simulação no PC |
-| RF04 | Conhecer o componente | Mostra nome, função e alerta do componente na mira | ✅ | Simulação no PC |
-| RF05 | Agir com segurança | Exibe alerta obrigatório antes das etapas críticas | ✅ | Simulação no PC |
-| RF06 | Seguir o procedimento | Conduz as 15 etapas e destaca o componente pedido | ✅ | Simulação no PC |
-| RF07 | Medir o desempenho | Grava um CSV por participante com todos os eventos | ✅ | Simulação no PC |
-| RF08 | Medir o erro | Conta identificações incorretas e calcula a taxa de erros | ✅ | Simulação no PC |
+| RF01 | Acessar o painel pela câmera | Abre a câmera em modo RA e inicia a sessão do participante, com o conjunto de etapas escolhido (A ou B) | ✅ | Smartphone |
+| RF02 | Reconhecer marcadores | Reconhece os 3 marcadores cadastrados na Reference Image Library | ✅ | Smartphone |
+| RF03 | Identificar o componente | O participante aponta a mira para um marcador e confirma | ✅ | Smartphone |
+| RF04 | Conhecer o componente | Mostra nome, função e alerta do componente na mira | ✅ | Smartphone |
+| RF05 | Agir com segurança | Exibe alerta obrigatório antes das etapas críticas | ✅ | Smartphone |
+| RF06 | Seguir o procedimento | Conduz as 15 etapas do conjunto escolhido e destaca o componente pedido | ✅ | Smartphone |
+| RF07 | Medir o desempenho | Grava um CSV por sessão com todos os eventos | ✅ | Smartphone |
+| RF08 | Medir o erro | Conta identificações incorretas e calcula a taxa de erros | ✅ | Smartphone |
 
 **Legenda:** ✅ Implementado · 🚧 Em desenvolvimento · ⬜ Planejado · ❌ Cancelado
 
-Todas as funcionalidades estão implementadas e foram verificadas no computador com o XR Simulation (Seção 22.1). No smartphone, foram verificadas num teste preliminar com os marcadores exibidos na tela do computador (Seção 22.2); os testes formais estão na Seção 22.3. Os conjuntos A e B, o SUS e a entrevista do estudo piloto estão planejados (Seção 11.5).
+Todas as funcionalidades estão implementadas. Foram verificadas no computador com o XR Simulation (Seção 22.1) e no smartphone, no teste preliminar de 27/10/2026 (Seção 22.2) e nos testes técnicos de 07/11/2026 (Seção 22.3).
 
 ---
 
@@ -115,13 +115,13 @@ Todas as funcionalidades estão implementadas e foram verificadas no computador 
 | ID | Categoria | Requisito | Situação |
 |---|---|---|---|
 | RNF01 | Plataforma | Executar em smartphones Android compatíveis com ARCore, sem acessórios adicionais | APK Android (ARM64, IL2CPP, ARCore obrigatório) instalado e executado no Samsung Galaxy A56 5G |
-| RNF02 | Qualidade de rastreamento | Reconhecer corretamente os marcadores nas condições de iluminação, distância e ângulo do experimento, sem falsos reconhecimentos | Marcadores com nota ≥ 75 no arcoreimg; testes no celular pendentes |
-| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; 27 a 30 FPS no teste preliminar no celular; medição formal pendente |
-| RNF04 | Estabilidade | Completar uma sessão experimental sem falhas que exijam reinício da aplicação | Sessões completas na simulação; CSV gravado a cada evento |
-| RNF05 | Disponibilidade | Operar sem conexão com a internet, com o conteúdo armazenado localmente | Conteúdo empacotado no APK; teste em modo avião pendente |
+| RNF02 | Qualidade de rastreamento | Reconhecer corretamente os marcadores nas condições de iluminação, distância e ângulo do experimento, sem falsos reconhecimentos | Marcadores com nota ≥ 75 no arcoreimg. Com marcadores de 8 cm, reconhecimento até cerca de 40 cm, nos ângulos e nas iluminações testados, sem associações erradas (Seção 22.3) |
+| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; nunca abaixo de 15 FPS nos testes de 07/11/2026 (Seção 22.3) |
+| RNF04 | Estabilidade | Completar uma sessão experimental sem falhas que exijam reinício da aplicação | Sessões completas no smartphone, sem travamento nem reinício; CSV gravado a cada evento (Seção 22.3) |
+| RNF05 | Disponibilidade | Operar sem conexão com a internet, com o conteúdo armazenado localmente | Conteúdo empacotado no APK; sessão completa em modo avião (Seção 22.3) |
 | RNF06 | Usabilidade | Textos legíveis à distância de uso e operação com uma das mãos | Fonte proporcional à tela e botões grandes na parte de baixo |
-| RNF07 | Equivalência de conteúdo | Gerar a documentação impressa e o conteúdo do aplicativo a partir da mesma fonte de dados | App, manual impresso e ficha gerados do mesmo `conteudo_painel.json` |
-| RNF08 | Segurança e privacidade | Uso restrito ao painel didático desenergizado, conteúdo revisado por profissional e dados dos participantes anonimizados | Participantes só por código (P01…); revisão técnica pendente |
+| RNF07 | Equivalência de conteúdo | Gerar a documentação impressa e o conteúdo do aplicativo a partir da mesma fonte de dados | App, manuais e fichas dos conjuntos A e B gerados do mesmo `conteudo_painel.json` |
+| RNF08 | Segurança e privacidade | Uso sem intervenção elétrica real e dados dos participantes anonimizados | Testes com painel virtual em tela; participantes só por código (P01…) |
 
 ---
 
@@ -151,7 +151,7 @@ Todas as funcionalidades estão implementadas e foram verificadas no computador 
 |---|---|---|---|
 | Smartphone | Samsung Galaxy A56 5G (de um integrante) | Android; consta na lista oficial de aparelhos compatíveis com ARCore | Execução, testes e experimento (app executado em 27/10/2026) |
 | Computador | MSI MS-7E06 | Windows 11 Pro, Intel Core i7-13700, 32 GB de RAM, NVIDIA GeForce RTX 4060 | Desenvolvimento, simulação e build |
-| Painel elétrico didático | Painel do laboratório da instituição (modelo a confirmar) | Desenergizado, com disjuntor, contator e relé de sobrecarga | Cenário do experimento |
+| Painel virtual | Painel 3D do projeto, exibido na tela de um computador | Disjuntor, contator e relé de sobrecarga, com os marcadores impressos fixados ao lado de cada componente | Cenário dos testes técnicos de 07/11/2026 |
 | Marcadores impressos | — | 3 imagens de 8 × 8 cm, papel fosco | Referências de rastreamento |
 
 ---
@@ -190,7 +190,7 @@ RastreadorMarcadores    RegistroExperimento → CSV
    ↓
 AR Foundation → ARCore → Câmera
    ↓
-Marcadores no painel didático
+Marcadores ao lado dos componentes do painel
 ```
 
 No computador, o ARCore é substituído pelo **XR Simulation**: o mesmo app roda no Play do editor sobre um painel virtual com os mesmos marcadores (Seção 16.2).
@@ -232,7 +232,9 @@ As imagens são geradas por script (`Painel AR → Marcadores → Gerar imagens`
 
 ### 11.4 Registro do experimento
 
-Cada sessão gera um arquivo `P01_RA_AAAAMMDD_HHMMSS.csv` na pasta do aplicativo no celular (`Android/data/br.edu.facens.painelar/files`), gravado linha a linha para não perder dados em caso de falha.
+Cada sessão gera um arquivo `P01_RA_A_AAAAMMDD_HHMMSS.csv` (participante, condição, conjunto, data e hora) na pasta do aplicativo no celular (`Android/data/br.edu.facens.painelar/files`), gravado linha a linha para não perder dados em caso de falha. O CSV tem uma coluna com o conjunto usado e registra a versão do conteúdo no evento `SESSAO_INICIO`.
+
+No Android 11 ou superior, essa pasta não aparece no gerenciador de arquivos do celular. Para copiar os CSVs, ligue o celular no computador pelo cabo, em modo de transferência de arquivos, e abra a pasta pelo Windows Explorer, ou use `adb pull /sdcard/Android/data/br.edu.facens.painelar/files/ C:\AR\dados`.
 
 | Evento | Quando é registrado |
 |---|---|
@@ -240,7 +242,7 @@ Cada sessão gera um arquivo `P01_RA_AAAAMMDD_HHMMSS.csv` na pasta do aplicativo
 | `ETAPA_INICIO` | Início de cada etapa |
 | `ALERTA_EXIBIDO` / `ALERTA_CONFIRMADO` | Tela de alerta aparece / participante confirma a leitura |
 | `MARCADOR_VISIVEL` | Um marcador passa a ser visto pela câmera |
-| `INFO_EXIBIDA` | Muda o componente na mira e suas informações aparecem |
+| `INFO_EXIBIDA` | Um componente fica pelo menos 0,3 s na mira e suas informações aparecem |
 | `IDENTIFICACAO` | Participante confirma um componente (`correto` = 1 ou 0) |
 | `CONFIRMACAO_SEM_MARCADOR` | Toque em Confirmar sem marcador na mira (não conta como identificação) |
 
@@ -252,19 +254,33 @@ Os materiais da condição de documentação impressa são gerados do mesmo `con
 
 | Material | Arquivo |
 |---|---|
-| Manual impresso (foto do painel, componentes e as 15 etapas) | `docs/impressao/Documentacao_Impressa.pdf` |
-| Ficha de observação do pesquisador (com gabarito; não entregar ao participante) | `docs/impressao/Ficha_Observacao_Papel.pdf` |
-| Modelo de CSV da condição papel, com as mesmas colunas do app | `docs/analise/modelo_papel.csv` |
+| Manual impresso (foto do painel, componentes e as 15 etapas), um por conjunto | `docs/impressao/Documentacao_Impressa_A.pdf` e `Documentacao_Impressa_B.pdf` |
+| Ficha de observação do pesquisador (com gabarito; não entregar ao participante), uma por conjunto | `docs/impressao/Ficha_Observacao_Papel_A.pdf` e `Ficha_Observacao_Papel_B.pdf` |
+| Modelo de CSV da condição papel, com as mesmas colunas do app, um por conjunto | `docs/analise/modelo_papel_A.csv` e `modelo_papel_B.csv` |
 
-A foto do painel usada no manual (`docs/impressao/foto_painel.jpg`) é **provisória**: foi gerada do painel virtual e deve ser trocada por uma foto do painel didático real antes do experimento.
+A foto do painel usada no manual (`docs/impressao/foto_painel.jpg`) foi gerada a partir do painel virtual.
 
 O script `tools/analisar.ps1` lê todos os CSVs de uma pasta (os do app e os da condição papel) e gera `resumo.csv` (acertos, erros, taxa e tempo por participante e condição) e `comparativo.csv` (RA e papel lado a lado). A análise é descritiva, sem teste de significância. Passo a passo em `docs/ANALISE.md`.
 
-**Planejado para o estudo piloto (ainda não implementado):**
+**Conjuntos A e B e rodízio.** Para reduzir o efeito de aprendizagem entre as duas condições, cada participante faz a RA com um conjunto de etapas e o papel com o outro. Os dois conjuntos usam os **mesmos 3 componentes**, com 5 etapas para cada um e alertas nas mesmas etapas (1, 3, 6 e 15), mas em **ordens diferentes**:
 
-- dois conjuntos equivalentes de componentes (A e B), um por condição, para reduzir o efeito de aprendizagem entre RA e papel;
-- questionário SUS e entrevista curta após a sessão, para as evidências de percepção dos participantes;
-- Termo de Consentimento a partir do modelo institucional da disciplina.
+| Conjunto | Ordem dos componentes nas 15 etapas |
+|---|---|
+| A | DJ1 DJ1 DJ1 K1 FT1 K1 FT1 K1 FT1 DJ1 K1 FT1 FT1 K1 DJ1 |
+| B | DJ1 DJ1 DJ1 FT1 K1 K1 K1 FT1 DJ1 FT1 K1 FT1 K1 FT1 DJ1 |
+
+Ao carregar o conteúdo, o `ConteudoPainel` confere se os dois conjuntos são equivalentes e acusa erro se não forem. A tela inicial sugere o conjunto pelo número do participante:
+
+| Participante | Primeira condição | Segunda condição |
+|---|---|---|
+| P01 | RA, conjunto A | Papel, conjunto B |
+| P02 | Papel, conjunto B | RA, conjunto A |
+| P03 | RA, conjunto B | Papel, conjunto A |
+| P04 | Papel, conjunto A | RA, conjunto B |
+
+Como os componentes são os mesmos nos dois conjuntos, o efeito de aprendizagem é reduzido, mas não eliminado (Seção 24). O `analisar.ps1` mostra os conjuntos usados, a taxa de erros por conjunto e avisa quando um participante repete o mesmo conjunto.
+
+Os instrumentos de percepção do estudo piloto (Termo de Consentimento, questionário de caracterização, SUS e roteiro de entrevista) foram elaborados pela equipe e são descritos no artigo científico.
 
 ---
 
@@ -279,6 +295,7 @@ painel-ar/
 │   │   ├── PainelARSimulacao.cs
 │   │   ├── GeradorMarcadores.cs
 │   │   ├── GeradorDocumentoImpresso.cs
+│   │   ├── CapturaTelas.cs
 │   │   └── TesteSimulacao.cs
 │   ├── Markers/
 │   │   ├── marcador_DJ1.png
@@ -310,6 +327,7 @@ painel-ar/
 │   ├── documents/
 │   ├── images/
 │   ├── impressao/
+│   ├── testes/
 │   ├── ANALISE.md
 │   ├── MARCADORES.md
 │   └── TESTE_NO_PC.md
@@ -334,8 +352,9 @@ painel-ar/
 | `Assets/ReferenceImages` | Biblioteca de marcadores usada pelo ARCore |
 | `Assets/Scenes` | Cena principal de RA (o nome `WL03ContextualAR` foi herdado do projeto-base) |
 | `Assets/Simulacao` | Painel virtual usado pelo XR Simulation no computador (gerado por script) |
-| `docs/impressao` | Marcadores, manual impresso, ficha de observação e foto do painel |
-| `docs/analise` | Modelo de CSV da condição papel |
+| `docs/impressao` | Marcadores, manuais impressos e fichas de observação dos conjuntos A e B, e foto do painel |
+| `docs/analise` | Modelos de CSV da condição papel (conjuntos A e B) |
+| `docs/testes` | Planilha dos testes técnicos (`Testes_Tecnicos.xlsx`) e CSVs das sessões de teste (`sessoes/`) |
 | `docs/diagrams` | Diagramas de arquitetura, fluxo e caso de uso (fontes Mermaid e imagem da arquitetura) |
 | `docs/documents` | Artigo científico, inventário de artigos e instrumentos de coleta |
 | `docs/images` | Screenshots e fotos |
@@ -349,15 +368,16 @@ Pastas `Library/`, `Temp/`, `Logs/`, `UserSettings/` e `Builds/` (onde fica o AP
 
 | Script | Responsabilidade |
 |---|---|
-| `ConteudoPainel.cs` | Lê `conteudo_painel.json` e valida que toda etapa aponta para um componente existente |
+| `ConteudoPainel.cs` | Lê `conteudo_painel.json`, valida que toda etapa aponta para um componente existente e que os conjuntos A e B são equivalentes |
 | `RastreadorMarcadores.cs` | Recebe os marcadores do AR Foundation, desenha destaque e rótulo e informa qual está na mira |
-| `ProcedimentoController.cs` | Controla as fases da sessão (início, alerta, identificação, conclusão) e conta acertos e erros |
-| `InterfaceApp.cs` | Desenha as telas, a mira, os botões e o contador de FPS |
+| `ProcedimentoController.cs` | Controla as fases da sessão (início, alerta, identificação, conclusão), o conjunto e o rodízio, e conta acertos e erros |
+| `InterfaceApp.cs` | Desenha as telas, a barra de progresso, os cartões, a mira, os botões e o contador de FPS |
 | `RegistroExperimento.cs` | Grava cada evento em uma linha do CSV da sessão |
 | `PainelARSetup.cs` (editor) | Menus **Configurar projeto**, **Validar projeto** e **Gerar APK**: nome e pacote do app, montagem da cena, validação do JSON contra a biblioteca de marcadores e build |
 | `GeradorMarcadores.cs` (editor) | Gera as imagens dos marcadores e a `PainelReferenceImageLibrary` |
 | `PainelARSimulacao.cs` (editor) | Liga o XR Simulation no Play do editor e gera o painel virtual com DJ1, K1, FT1 e os marcadores |
-| `GeradorDocumentoImpresso.cs` (editor) | Gera, a partir do mesmo JSON, o manual impresso, a foto do painel e a ficha de observação com o modelo de CSV |
+| `GeradorDocumentoImpresso.cs` (editor) | Gera, a partir do mesmo JSON, o manual impresso, a foto do painel e a ficha de observação com o modelo de CSV, um conjunto de arquivos para A e outro para B |
+| `CapturaTelas.cs` (editor) | Menu **Painel AR → Capturar telas do app**: gera as capturas das telas em `docs/images` |
 | `TesteSimulacao.cs` (editor) | Teste automático de uma sessão completa de 15 etapas no XR Simulation, com conferência do CSV |
 
 ---
@@ -426,14 +446,14 @@ Passo a passo completo em `docs/TESTE_NO_PC.md`. Quando a biblioteca de marcador
 
 ### 16.3 Documentação impressa
 
-**Painel AR → Gerar documentação impressa** cria `docs/impressao/Documentacao_Impressa.html` (impressão pelo navegador). **Painel AR → Gerar ficha de observação (papel)** cria a ficha do pesquisador e o modelo de CSV. **Painel AR → Gerar foto do painel (simulação)** renderiza a foto provisória do painel virtual.
+**Painel AR → Gerar documentação impressa** cria `docs/impressao/Documentacao_Impressa_A.html` e `_B.html` (impressão pelo navegador). **Painel AR → Gerar ficha de observação (papel)** cria a ficha do pesquisador e o modelo de CSV. **Painel AR → Gerar foto do painel (simulação)** renderiza a foto do painel virtual.
 
 ---
 
 ## 17. Como Utilizar a Aplicação
 
 1. Abra o **Painel AR** no smartphone e autorize o acesso à câmera.
-2. Escolha o código do participante (P01, P02…) com os botões **−** e **+**.
+2. Escolha o código do participante (P01, P02…) com os botões **−** e **+** e confira o conjunto de etapas (A ou B), que o app sugere pelo rodízio.
 3. Toque em **Iniciar sessão**.
 4. Quando aparecer a tela de alerta, leia e toque em **Li e entendi**.
 5. Leia a instrução da etapa e aponte a mira para o marcador do componente pedido (destacado em laranja). A mira deve ficar sobre o **marcador** colado ao lado do componente, e não sobre o componente.
@@ -449,7 +469,7 @@ Passo a passo completo em `docs/TESTE_NO_PC.md`. Quando a biblioteca de marcador
 
 ```mermaid
 flowchart TD
-    A[Abrir aplicativo] --> B[Escolher participante]
+    A[Abrir aplicativo] --> B[Escolher participante e conjunto]
     B --> C[Iniciar sessão]
     C --> D{Etapa tem alerta?}
     D -- Sim --> E[Exibir alerta de segurança]
@@ -487,7 +507,7 @@ flowchart LR
 ## 20. Fluxo de Navegação
 
 ```text
-Tela Inicial (participante)
+Tela Inicial (participante e conjunto)
     ↓
 Alerta de Segurança (quando a etapa tem alerta)
     ↓
@@ -502,34 +522,30 @@ Próximo Participante → Tela Inicial
 
 ## 21. Interface
 
-Capturas disponíveis:
+Telas atuais do aplicativo, geradas por **Painel AR → Capturar telas do app** no XR Simulation (por isso o contador mostra mais de 200 FPS, valor do computador):
 
-```text
-docs/images/
-├── etapa-componente-na-mira.jpg  # smartphone: etapa 4 com o contator K1 na mira
-├── alerta-seguranca.jpg          # smartphone: alerta antes da etapa 6
-├── resumo-sessao.jpg             # smartphone: resumo de uma sessão de teste
-├── simulacao-painel.png          # simulação: painel virtual com os 3 marcadores reconhecidos
-├── simulacao-painel-mira.png     # simulação: painel virtual com a porta aberta e a mira
-└── simulacao-etapa.png           # simulação: marcador pedido destacado em laranja
-```
+| Tela inicial | Alerta de segurança | Etapa com o componente na mira | Etapa sem componente na mira | Resumo da sessão |
+|---|---|---|---|---|
+| ![Tela inicial com participante e conjunto](docs/images/tela-inicial.png) | ![Alerta de segurança da etapa 1](docs/images/alerta-seguranca.png) | ![Etapa com o disjuntor DJ1 na mira](docs/images/etapa-componente-na-mira.png) | ![Etapa sem componente na mira](docs/images/etapa-sem-componente.png) | ![Resumo da sessão](docs/images/resumo-sessao.png) |
 
-As capturas do smartphone são do teste preliminar de 27/10/2026, com os marcadores exibidos na tela do computador (Seção 22.2), e não do painel didático.
+Capturas do teste preliminar no smartphone (27/10/2026), com a versão anterior das telas e os marcadores exibidos na tela do computador (Seção 22.2):
 
 | Etapa com o componente na mira | Alerta de segurança | Resumo da sessão |
 |---|---|---|
 | ![Etapa 4 com o contator K1 na mira, no smartphone](docs/images/etapa-componente-na-mira.jpg) | ![Alerta de segurança antes da etapa 6, no smartphone](docs/images/alerta-seguranca.jpg) | ![Resumo de uma sessão de teste, no smartphone](docs/images/resumo-sessao.jpg) |
 
+Também estão em `docs/images/` as capturas do painel virtual na simulação (`simulacao-painel.png`, `simulacao-painel-mira.png` e `simulacao-etapa.png`).
+
 Telas do aplicativo:
 
 | Tela | Finalidade | Principais elementos | Ação do usuário |
 |---|---|---|---|
-| Inicial | Identificar a sessão | Título do procedimento, código do participante (P01…), botões − e +, Iniciar sessão | Escolher o código e iniciar |
+| Inicial | Identificar a sessão | Título do procedimento, código do participante (P01…), botões − e +, botões dos conjuntos A e B, aviso do rodízio, Iniciar sessão | Escolher o código, conferir o conjunto e iniciar |
 | Alerta de segurança | Exibir o alerta antes das etapas críticas | Painel vermelho com o número da etapa e o texto do alerta, botão Li e entendi | Ler e confirmar |
-| Etapa | Conduzir a identificação | Mira, destaque laranja no marcador pedido, título e instrução da etapa, cartão Na mira com nome, função e alerta, botão Confirmar componente, contador de FPS | Apontar a mira para o marcador e confirmar |
-| Resumo | Encerrar a sessão | Acertos, erros, taxa de erros, tempo e caminho do CSV, botão Próximo participante | Passar ao próximo participante |
+| Etapa | Conduzir a identificação | Barra de progresso com etapa, participante e conjunto, mira, destaque laranja no marcador pedido, título e instrução da etapa, cartão Na mira com nome, função e alerta, botão Confirmar componente, contador de FPS | Apontar a mira para o marcador e confirmar |
+| Resumo | Encerrar a sessão | Participante e conjunto, acertos, erros, taxa de erros, tempo e caminho do CSV, botão Próximo participante | Passar ao próximo participante |
 
-Capturas a adicionar: `tela-inicial.jpg` (tela inicial no smartphone) e `painel-com-marcadores.jpg` (painel didático com os marcadores colados).
+Captura a adicionar: foto do painel virtual em tela com os marcadores impressos fixados.
 
 ---
 
@@ -569,20 +585,36 @@ Teste feito pela equipe no Samsung Galaxy A56 5G, com os marcadores exibidos na 
 
 Observação: com os marcadores na tela do monitor, o tamanho real deles não é de 8 cm. Por isso, os rótulos 3D apareceram maiores e deslocados (por exemplo, "Disjuntor geral DJ1" no topo da tela de resumo). O posicionamento dos rótulos precisa ser conferido com os marcadores impressos no tamanho correto.
 
-### 22.3 Testes formais no smartphone e no painel didático
+### 22.3 Testes técnicos no smartphone (07/11/2026)
 
-Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Realizados no painel didático, com os marcadores impressos e o smartphone do experimento.
+Os critérios foram definidos antes da execução, conforme a Seção 3.9 do artigo. Como não foi possível usar um painel físico, os testes foram feitos **remotamente** pelos integrantes, com o painel virtual do projeto exibido na tela de um computador e os **marcadores impressos em 8 × 8 cm** fixados ao lado de cada componente.
 
-| Teste | Procedimento | Resultado esperado | Resultado obtido | Status |
+As tentativas não foram registradas de forma padronizada por condição: um integrante fez 7 tentativas, e os demais fizeram tentativas adicionais, somando pelo menos 10 no total. A iluminação foi variada nas condições disponíveis em casa, sem medição de luz. Por isso, os resultados de reconhecimento são observações da equipe, não contagens por condição. A planilha `docs/testes/Testes_Tecnicos.xlsx` traz o modelo para a contagem detalhada.
+
+| Teste | Procedimento previsto | Resultado esperado | Resultado obtido | Status |
 |---|---|---|---|---|
-| Reconhecimento por distância | 10 tentativas por marcador a 30, 50 e 80 cm | 10/10 a 30 e 50 cm; ≥ 9/10 a 80 cm | Pendente (teste no smartphone) | ⬜ |
-| Reconhecimento por ângulo | 10 tentativas a 50 cm, a 0°, 30° e 45° | ≥ 9/10 em cada ângulo | Pendente (teste no smartphone) | ⬜ |
-| Iluminação | 10 tentativas a 50 cm, luz normal e reduzida | ≥ 9/10 em cada condição | Pendente (teste no smartphone) | ⬜ |
-| Associação correta | Mira em cada marcador, conferir nome exibido | Nenhuma associação errada | Pendente (teste no smartphone) | ⬜ |
-| Desempenho | Observar FPS durante uma sessão completa | Sempre ≥ 15 FPS | Pendente (teste no smartphone) | ⬜ |
-| Estabilidade | 3 sessões completas seguidas | Nenhum travamento ou reinício | Pendente (teste no smartphone) | ⬜ |
-| Operação offline | 1 sessão em modo avião | Sessão completa | Pendente (teste no smartphone) | ⬜ |
-| Registro de dados | Conferir CSVs das sessões de teste | 15 linhas `IDENTIFICACAO` por sessão; erros iguais aos provocados | Pendente (teste no smartphone) | ⬜ |
+| Reconhecimento por distância | 10 tentativas por marcador a 30, 50 e 80 cm | 10/10 a 30 e 50 cm; ≥ 9/10 a 80 cm | Com marcadores de 8 cm, reconhece até cerca de 40 cm; acima disso, seria preciso um marcador maior | ✅ a 30 cm · ❌ a 50 e 80 cm |
+| Reconhecimento por ângulo | 10 tentativas a 50 cm, a 0°, 30° e 45° | ≥ 9/10 em cada ângulo | Reconhecimento em todos os ângulos testados, a até 40 cm | ✅ a até 40 cm |
+| Iluminação | 10 tentativas a 50 cm, luz normal e reduzida | ≥ 9/10 em cada condição | Reconhecimento em todas as condições de iluminação testadas | ✅ |
+| Associação correta | Mira em cada marcador, conferir nome exibido | Nenhuma associação errada | Cada marcador mostrou o componente correto; nenhuma associação errada | ✅ |
+| Desempenho | Observar FPS durante uma sessão completa | Sempre ≥ 15 FPS | Nunca abaixo de 15 FPS | ✅ |
+| Estabilidade | 3 sessões completas seguidas | Nenhum travamento ou reinício | 3 sessões completas no conjunto A, sem travamento nem reinício | ✅ |
+| Operação offline | 1 sessão em modo avião | Sessão completa | Sessão completa em modo avião | ✅ |
+| Registro de dados | Conferir CSVs das sessões de teste | 15 linhas `IDENTIFICACAO` por sessão; erros iguais aos provocados | Sessão com erros provocados nas etapas 4 e 12: 15 linhas `IDENTIFICACAO`, `correto = 0` só nessas etapas e resumo com 13 acertos, 2 erros e 13,3%. As outras duas sessões completas: 15 de 15 | ✅ |
+
+Os CSVs das sessões estão em `docs/testes/sessoes/` (códigos de teste, sem participantes):
+
+| Arquivo | Conjunto | Resultado |
+|---|---|---|
+| `P01_RA_A_20261107_133203.csv` | A | Sessão completa: 15 acertos, 0 erros, 133,7 s |
+| `P01_RA_A_20261107_134000.csv` | A | Sessão completa: 15 acertos, 0 erros, 119,2 s |
+| `P01_RA_A_20261107_135514.csv` | A | Sessão completa com erros provocados nas etapas 4 e 12: 13 acertos, 2 erros (13,3%), 33,9 s |
+
+**Consequências para o experimento:**
+
+- com marcadores de 8 cm, o participante precisa ficar a até cerca de 40 cm dos marcadores; para distâncias maiores, é preciso imprimir marcadores maiores e atualizar o tamanho físico na biblioteca de imagens;
+- as sessões de teste usaram só o conjunto A; vale fazer uma sessão completa com o conjunto B antes da coleta;
+- antes da coleta, os CSVs de teste devem ser removidos do celular, porque os códigos P01 e P02 serão usados pelos participantes.
 
 ---
 
@@ -591,7 +623,8 @@ Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Real
 | Dispositivo | Sistema | Versão | Resultado |
 |---|---|---|---|
 | Computador (XR Simulation no editor Unity) | Windows 11 Pro | Unity 6000.6.7f1 | Sessões completas sem falha (Seção 22.1) |
-| Samsung Galaxy A56 5G (de um integrante) | Android | — | Aplicativo executado; 2 sessões completas no teste preliminar, a 27–30 FPS (Seção 22.2). Testes formais pendentes (Seção 22.3) |
+| Samsung Galaxy A56 5G (de um integrante) | Android | — | Aplicativo executado; 2 sessões completas no teste preliminar, a 27–30 FPS (Seção 22.2) |
+| Smartphones Android dos integrantes, nos testes remotos | Android | — | Testes técnicos de 07/11/2026 (Seção 22.3) |
 
 ---
 
@@ -601,13 +634,16 @@ Critérios definidos antes da execução, conforme a Seção 3.9 do artigo. Real
 - Funciona apenas em aparelhos compatíveis com ARCore.
 - Prova de conceito com 3 componentes e um único procedimento.
 - Por ser um estudo piloto com 2 a 4 participantes, a análise é apenas descritiva, sem inferência estatística; os resultados são evidências preliminares de viabilidade.
-- Os resultados valem para uma tarefa controlada em painel desenergizado e não devem ser generalizados para manutenção real nem interpretados como redução de acidentes.
+- Os resultados valem para uma tarefa controlada, sem intervenção elétrica, e não devem ser generalizados para manutenção real nem interpretados como redução de acidentes.
 - Mudanças no conteúdo exigem novo build, porque o JSON é empacotado dentro do APK.
-- O conteúdo técnico do arquivo `conteudo_painel.json` é provisório até a validação pelo profissional da área.
+- O conteúdo técnico do arquivo `conteudo_painel.json` foi elaborado pela equipe e não foi validado por profissional da área elétrica.
 - O aplicativo reconhece o **marcador** colado ao lado do componente, e não o componente: na simulação, foi natural mirar no próprio componente. As instruções padrão aos participantes precisam deixar isso claro.
-- Até agora, os testes foram feitos na simulação e num teste preliminar no smartphone com os marcadores na tela do computador; faltam os testes com marcadores impressos no painel didático.
+- Os testes usaram um painel virtual exibido em tela, e não um painel elétrico físico. O comportamento em um painel real (reflexos, superfícies metálicas, espaço disponível e iluminação do ambiente) não foi verificado.
+- Com marcadores de 8 cm, o reconhecimento funciona até cerca de 40 cm.
+- Nos testes de reconhecimento, as tentativas não foram contadas por condição e a iluminação não foi medida.
+- Os conjuntos A e B usam os mesmos 3 componentes, em ordens diferentes; isso reduz o efeito de aprendizagem entre as condições, mas não o elimina.
 - A nota exata de cada marcador no arcoreimg não é conhecida; sabe-se apenas que ficou ≥ 75.
-- Algumas instruções do conteúdo provisório não citam o componente (por exemplo, a etapa 3). No app, o destaque laranja compensa; no manual, a coluna "Componente" traz o nome. Vale revisar com o profissional.
+- Algumas instruções do conteúdo provisório não citam o componente (por exemplo, a etapa 3). No app, o destaque laranja compensa; no manual, a coluna "Componente" traz o nome.
 
 ---
 
@@ -617,17 +653,17 @@ Disponíveis:
 
 - capturas do painel virtual na simulação (Seção 21);
 - capturas das telas de etapa, alerta e resumo no smartphone, do teste preliminar (Seções 21 e 22.2);
-- foto provisória do painel virtual com os componentes indicados (`docs/impressao/foto_painel.jpg`);
-- manual impresso, ficha de observação e folha dos marcadores em `docs/impressao/`.
+- capturas das cinco telas atuais do aplicativo (Seção 21);
+- foto do painel virtual com os componentes indicados (`docs/impressao/foto_painel.jpg`);
+- manuais impressos, fichas de observação e folha dos marcadores em `docs/impressao/`;
+- CSVs das sessões dos testes técnicos de 07/11/2026 em `docs/testes/sessoes/` (Seção 22.3).
 
 Pendentes:
 
-- captura da tela inicial no smartphone (Seção 21);
-- foto do painel didático com os marcadores colados;
-- vídeo da experiência RA durante uma sessão completa;
-- CSVs anonimizados das sessões de teste em `docs/documents/`.
+- foto do painel virtual em tela com os marcadores impressos fixados;
+- vídeo da experiência RA durante uma sessão completa.
 
-O vídeo de demonstração será publicado após os testes no smartphone, e o link será adicionado aqui.
+Quando o vídeo de demonstração for publicado, o link será adicionado aqui.
 
 ---
 
@@ -651,16 +687,16 @@ Estimativa de 6 semanas e cerca de 100 horas de trabalho da equipe.
 | Atividade | Responsável | Status |
 |---|---|---|
 | Revisão bibliográfica | Equipe | ✅ |
-| Definição do painel, componentes e procedimento | Equipe | 🚧 (procedimento provisório; painel real a definir) |
-| Validação técnica do conteúdo por profissional | Equipe | ⬜ |
-| Protótipos de interface | Kauan | 🚧 (telas implementadas e capturadas no smartphone; figura pendente) |
-| Implementação da aplicação | Enrico e Kauan | 🚧 (implementada e verificada na simulação; JSON do painel real pendente) |
-| Integração do reconhecimento de marcadores | Enrico e Kauan | 🚧 (verificada na simulação e no smartphone com marcadores na tela; painel pendente) |
+| Definição do painel, componentes e procedimento | Equipe | ✅ (painel virtual, 3 componentes, conjuntos A e B; conteúdo `0.2-provisoria`) |
+| Validação técnica do conteúdo por profissional | Equipe | ❌ (não realizada, por decisão da equipe) |
+| Protótipos de interface | Kauan | ✅ |
+| Implementação da aplicação | Enrico e Kauan | ✅ (inclui conjuntos A e B e rodízio) |
+| Integração do reconhecimento de marcadores | Enrico e Kauan | ✅ (verificada no smartphone com marcadores impressos) |
 | Materiais da condição papel e script de análise | Equipe | ✅ |
-| Testes técnicos | Enrico e Kauan | 🚧 (simulação e teste preliminar no smartphone; testes formais pendentes) |
-| Protocolo experimental | Guilherme | ⬜ |
+| Testes técnicos | Equipe | ✅ (07/11/2026; reconhecimento até cerca de 40 cm com marcadores de 8 cm) |
+| Protocolo experimental | Guilherme | ✅ (instrumentos de coleta elaborados) |
 | Coleta e análise dos dados | Equipe | ⬜ |
-| Versão final do artigo | Equipe | ⬜ |
+| Versão final do artigo | Equipe | 🚧 |
 
 ---
 
@@ -718,6 +754,14 @@ O repositório oficial é https://github.com/KauanHYT/UPX8---Painel-Eletrico. O 
 
 **Solução:** resolvido. Em 27/10/2026 o aplicativo rodou no aparelho e completou duas sessões de teste (Seção 22.2).
 
+### Marcadores não eram reconhecidos acima de cerca de 40 cm
+
+**Sintoma:** com os marcadores impressos em 8 × 8 cm, o reconhecimento funcionou até cerca de 40 cm, mas não a 50 e 80 cm, distâncias previstas nos critérios.
+
+**Causa:** a partir de certa distância, o marcador ocupa poucos pixels na imagem da câmera, e o ARCore não encontra pontos de referência suficientes para reconhecê-lo.
+
+**Solução:** no experimento, o participante trabalha a até cerca de 40 cm dos marcadores. Para distâncias maiores, é preciso imprimir marcadores maiores e atualizar o tamanho físico de cada imagem na `PainelReferenceImageLibrary`.
+
 ### Comandos do Unity em linha de comando não abriam o projeto
 
 **Causa:** o projeto estava aberto no editor, e o Unity não abre o mesmo projeto duas vezes.
@@ -746,7 +790,7 @@ O repositório oficial é https://github.com/KauanHYT/UPX8---Painel-Eletrico. O 
 | AR Foundation / ARCore | Software | Gratuitos |
 | Smartphone Android com ARCore | Hardware | Equipamento da equipe (Samsung Galaxy A56 5G) |
 | Computador | Hardware | Equipamento da equipe |
-| Painel elétrico didático | Hardware | Laboratório da instituição |
+| Painel virtual exibido em tela | Software | Sem custo (painel 3D do próprio projeto) |
 | Impressão dos marcadores e da documentação | Material | Baixo custo |
 
 ---

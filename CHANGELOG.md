@@ -2,7 +2,17 @@
 
 Evolução do Painel AR, a partir do histórico de commits do repositório.
 
-## Não lançado
+## v0.2-dispositivo — 2026-11-07
+- docs: testes técnicos no smartphone de 07/11/2026 registrados no README (Seção 22.3), com os CSVs das sessões em `docs/testes/sessoes/`; reconhecimento até cerca de 40 cm com marcadores de 8 cm.
+- docs: README atualizado para o painel virtual em tela, os conjuntos A e B, as telas novas e os arquivos renomeados; validação por profissional retirada do escopo.
+
+## 2026-11-05
+- feat: conjuntos A e B no `conteudo_painel.json` (mesmas 15 tarefas em ordens diferentes), validação de equivalência e rodízio por participante.
+- feat: coluna do conjunto no CSV e no nome do arquivo; manual, ficha e modelo de CSV da condição papel para cada conjunto; `analisar.ps1` com taxa por conjunto.
+- feat: telas do app redesenhadas e menu para capturar as telas em `docs/images`; `INFO_EXIBIDA` só é gravado com o componente 0,3 s na mira.
+- docs: planilha de testes técnicos em `docs/testes/Testes_Tecnicos.xlsx`.
+
+## 2026-10-27 (preliminar)
 - docs: teste preliminar no smartphone (Samsung Galaxy A56 5G, 27/10/2026) registrado no README; capturas das telas de etapa, alerta e resumo em `docs/images/`.
 
 ## v0.1-simulacao — 2026-10-31

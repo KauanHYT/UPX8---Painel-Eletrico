@@ -17,7 +17,7 @@ Cada participante faz 15 identificações em cada condição. Os dados das duas 
 | Ficha de observação do pesquisador, uma por conjunto | `docs/impressao/Ficha_Observacao_Papel_A` e `_B` (`.html` / `.pdf`) | `Painel AR → Gerar ficha de observação (papel)` |
 | Modelo de CSV da condição papel, um por conjunto | `docs/analise/modelo_papel_A.csv` e `_B.csv` | gerado junto com a ficha |
 
-Sempre que o JSON mudar (por exemplo, depois da revisão do profissional), gere todos de novo, reimprima e gere um novo APK.
+Sempre que o JSON mudar (por exemplo, depois de uma correção no conteúdo), gere todos de novo, reimprima e gere um novo APK.
 
 A **foto atual é do painel virtual** da simulação. Antes do experimento, troque por uma foto frontal do painel didático real, com o nome de cada componente indicado (Parte 10 do guia), salva com o mesmo nome `foto_painel.jpg`.
 
