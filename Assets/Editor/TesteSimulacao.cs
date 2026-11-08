@@ -94,6 +94,7 @@ namespace PainelAR.EditorTools
                     if (agora - _desde < EsperaAposMirar) return;
                     string naMira = rastreador.MarcadorNaMira();
                     if (naMira != _alvo) { Falhar("etapa " + app.EtapaAtual.numero + ": mira em " + (naMira ?? "nada") + ", esperado " + _alvo); return; }
+                    if (!app.PodeConfirmar) return; // aguarda a mira estável liberar o botão
                     if (!_imagemEtapaSalva) { SalvarImagem("teste_simulacao_etapa.png"); _imagemEtapaSalva = true; }
                     app.ConfirmarIdentificacao();
                     IrPara(Passo.Mirando, agora);

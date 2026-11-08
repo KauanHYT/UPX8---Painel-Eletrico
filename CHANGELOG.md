@@ -2,9 +2,15 @@
 
 Evolução do Painel AR, a partir do histórico de commits do repositório.
 
-## v0.2-dispositivo — 2026-11-07
-- docs: testes técnicos no smartphone de 07/11/2026 registrados no README (Seção 22.3), com os CSVs das sessões em `docs/testes/sessoes/`; reconhecimento até cerca de 40 cm com marcadores de 8 cm.
-- docs: README atualizado para o painel virtual em tela, os conjuntos A e B, as telas novas e os arquivos renomeados; validação por profissional retirada do escopo.
+## Pós-piloto
+- feat: confirmação só liberada com a mira 0,5 s parada sobre o mesmo marcador; o botão enche de verde durante a espera, e a contagem recomeça a cada etapa. Corrige os erros do estudo piloto causados por toque acidental e por confirmação com a mira em movimento.
+- feat: evento `CONFIRMACAO_BLOQUEADA` no CSV para os toques recusados.
+- test: sessão de verificação da correção (`docs/testes/sessoes/P07_RA_B_20261107_205419.csv`) e quadros do vídeo em `docs/images/`.
+- docs: README com os resultados do estudo piloto (Seção 25.1), a verificação da correção (Seção 22.4) e o artigo final em `docs/documents/`.
+
+## v0.2-dispositivo
+- docs: testes técnicos no smartphone registrados no README (Seção 22.3), com os CSVs das sessões em `docs/testes/sessoes/`; reconhecimento até cerca de 40 cm com marcadores de 8 cm.
+- docs: README atualizado para o painel virtual em tela, os conjuntos A e B, as telas novas e os arquivos renomeados.
 
 ## 2026-11-05
 - feat: conjuntos A e B no `conteudo_painel.json` (mesmas 15 tarefas em ordens diferentes), validação de equivalência e rodízio por participante.

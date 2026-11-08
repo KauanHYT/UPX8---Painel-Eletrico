@@ -78,7 +78,7 @@ namespace PainelAR.EditorTools
                     if (app.FaseAtual == Fase.Concluido) { Proximo(Passo.Fim, agora); return; }
                     if (app.FaseAtual == Fase.Alerta) { app.ConfirmarAlerta(); _desde = agora - Espera; return; }
                     // Só confirma quando a mira já chegou ao componente pedido, para a sessão terminar sem erros
-                    if (app.ComponenteNaMira != null && app.ComponenteNaMira.id == app.EtapaAtual.componenteId) app.ConfirmarIdentificacao();
+                    if (app.ComponenteNaMira != null && app.ComponenteNaMira.id == app.EtapaAtual.componenteId) { if (app.PodeConfirmar) app.ConfirmarIdentificacao(); }
                     else TesteSimulacao.Mirar(gerenciador, app.Conteudo.BuscarPorId(app.EtapaAtual.componenteId).marcador);
                     _desde = agora - Espera + 0.5;
                     break;

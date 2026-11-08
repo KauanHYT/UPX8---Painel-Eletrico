@@ -213,9 +213,17 @@ namespace PainelAR
             }
 
             var botao = new Rect(x, y + p, largura, AlturaBotao);
-            if (naMira != null)
+            if (naMira != null && _app.PodeConfirmar)
             {
                 if (GUI.Button(botao, "CONFIRMAR COMPONENTE", _botaoConfirmar)) _app.ConfirmarIdentificacao();
+            }
+            else if (naMira != null)
+            {
+                // Botão enchendo de verde enquanto a mira fica parada; o toque antes disso é recusado e registrado
+                if (GUI.Button(botao, "SEGURE A MIRA...", _botaoInativo)) _app.ConfirmarIdentificacao();
+                GUI.BeginGroup(new Rect(botao.x, botao.y, botao.width * _app.ProgressoConfirmacao, botao.height));
+                GUI.Label(new Rect(0f, 0f, botao.width, botao.height), "SEGURE A MIRA...", _botaoConfirmar);
+                GUI.EndGroup();
             }
             else
             {

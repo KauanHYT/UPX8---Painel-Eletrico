@@ -13,6 +13,10 @@ namespace PainelAR
         [Tooltip("Tempo, em segundos, que um componente precisa ficar na mira para gerar INFO_EXIBIDA no CSV.")]
         [SerializeField] float tempoMinimoNaMira = 0.3f;
 
+        [Tooltip("Tempo, em segundos, que o mesmo marcador precisa ficar na mira para o botão Confirmar ser liberado. " +
+                 "Evita toques acidentais e confirmações com a mira ainda em movimento (resultado do estudo piloto).")]
+        [SerializeField] float tempoMinimoParaConfirmar = 0.5f;
+
         public ConteudoPainel Conteudo { get; private set; }
         public string ErroConfiguracao { get; private set; }
         public Fase FaseAtual { get; private set; } = Fase.Inicio;
@@ -34,6 +38,14 @@ namespace PainelAR
         public string Mensagem { get; private set; } = "";
         public string CaminhoArquivo => _registro != null ? _registro.CaminhoArquivo : "";
         public Componente ComponenteNaMira { get; private set; }
+
+        // Mira estável: o mesmo marcador está na mira desde o início da contagem.
+        // A contagem recomeça a cada etapa, então um toque logo depois de avançar não confirma a etapa seguinte.
+        public float ProgressoConfirmacao =>
+            _rastreador == null || _candidatoInfo == null || _rastreador.MarcadorNaMira() != _candidatoInfo
+                ? 0f
+                : Mathf.Clamp01((Time.time - _candidatoDesde) / Mathf.Max(tempoMinimoParaConfirmar, 0.0001f));
+        public bool PodeConfirmar => ProgressoConfirmacao >= 1f;
 
         // Rodízio de 4 participantes: alterna a ordem das condições e o conjunto usado em cada uma.
         // P01 RA(A) e depois papel(B), P02 papel(B) e depois RA(A), P03 RA(B) e depois papel(A), P04 papel(A) e depois RA(B).
@@ -125,6 +137,14 @@ namespace PainelAR
                 return; // não conta como identificação
             }
 
+            if (!PodeConfirmar)
+            {
+                Mensagem = "Mantenha a mira parada sobre o marcador até o botão ficar verde.";
+                _registro.Registrar("CONFIRMACAO_BLOQUEADA", etapa.numero, etapa.componenteId,
+                    Conteudo.BuscarPorMarcador(marcador)?.id ?? marcador);
+                return; // toque antes da mira estabilizar: não conta como identificação
+            }
+
             var indicado = Conteudo.BuscarPorMarcador(marcador);
             string idIndicado = indicado != null ? indicado.id : marcador;
             bool correto = idIndicado == etapa.componenteId;
@@ -182,6 +202,7 @@ namespace PainelAR
                 _candidatoInfo = marcador;
                 _candidatoDesde = Time.time;
             }
+            if (PodeConfirmar && Mensagem.StartsWith("Mantenha a mira")) Mensagem = "";
             if (marcador != _ultimaInfoRegistrada && Time.time - _candidatoDesde >= tempoMinimoNaMira)
             {
                 _ultimaInfoRegistrada = marcador;

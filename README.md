@@ -40,9 +40,9 @@ Para apoiar essa identificação, o **Painel AR** é um aplicativo Android de Re
 
 O aplicativo é o instrumento da condição experimental de RA de um **estudo piloto de viabilidade**, descrito no artigo científico da equipe. Durante a tarefa, ele registra cada identificação feita pelo participante e calcula a **taxa de erros de identificação**, que é comparada com o uso de documentação impressa de conteúdo equivalente. O piloto verifica se o protocolo e o aplicativo funcionam nas condições do experimento e produz evidências preliminares, sem pretensão de demonstrar eficácia generalizável.
 
-Não há intervenção elétrica real: como não foi possível usar um painel físico, os testes usam um painel virtual exibido em tela. O conteúdo técnico (versão `0.2-provisoria`) foi elaborado pela equipe e **não foi validado por profissional da área**.
+Não há intervenção elétrica real: como não foi possível usar um painel físico, os testes usam um painel virtual exibido em tela. O conteúdo técnico (versão `0.2-provisoria`) foi elaborado pela equipe.
 
-> **Estado atual:** o aplicativo está implementado, com os conjuntos de etapas A e B e o rodízio dos participantes. Foi testado no computador com o **XR Simulation** do AR Foundation (Seção 22.1), num teste preliminar no smartphone em 27/10/2026 (Seção 22.2) e nos testes técnicos de 07/11/2026, feitos remotamente com o painel virtual em tela e os marcadores impressos em 8 × 8 cm (Seção 22.3). Nesses testes, o reconhecimento, a associação, o desempenho, a estabilidade, a operação offline e o registro de dados atenderam aos critérios; o reconhecimento por distância funciona até cerca de 40 cm com marcadores de 8 cm.
+> **Estado atual:** o aplicativo está implementado, com os conjuntos de etapas A e B e o rodízio dos participantes. Foi testado no computador com o **XR Simulation** do AR Foundation (Seção 22.1), num teste preliminar no smartphone em 27/10/2026 (Seção 22.2) e nos testes técnicos no smartphone, feitos remotamente com o painel virtual em tela e os marcadores impressos em 8 × 8 cm (Seção 22.3). Nesses testes, o reconhecimento, a associação, o desempenho, a estabilidade, a operação offline e o registro de dados atenderam aos critérios; o reconhecimento por distância funciona até cerca de 40 cm com marcadores de 8 cm. O **estudo piloto** foi feito com 4 participantes, em coleta remota (Seção 25.1). Os erros com o app vieram da confirmação com a mira em movimento ou sobre o marcador da etapa anterior; depois do piloto, a confirmação passou a exigir 0,5 s de mira parada, correção verificada na Seção 22.4.
 
 ![Painel virtual com os marcadores reconhecidos na simulação](docs/images/simulacao-painel.png)
 
@@ -85,7 +85,7 @@ Desenvolver e avaliar, por meio de um estudo piloto de viabilidade, uma prova de
 
 Operadores em treinamento, estudantes de cursos técnicos e de engenharia e profissionais menos experientes que precisam identificar componentes de um painel elétrico antes de executar um procedimento de manutenção.
 
-No estudo piloto, participam de 2 a 4 voluntários, com registro da familiaridade prévia de cada um com componentes e procedimentos de manutenção elétrica (campo da ficha de observação, Seção 11.5). Cada participante realiza as duas condições (RA e documentação impressa), com a ordem e o conjunto de etapas alternados entre participantes (Seção 11.5). Participam adultos (18 anos ou mais), estudantes, sem atuação profissional em manutenção de painéis elétricos e que não integram a equipe.
+No estudo piloto, participaram 4 voluntários, recrutados por conveniência: adultos (18 anos ou mais), estudantes, sem atuação profissional em manutenção de painéis elétricos e que não integram a equipe. A familiaridade de cada um com componentes elétricos e com RA foi registrada no formulário de caracterização. Cada participante realizou as duas condições (app e manual), com a ordem e o conjunto de etapas alternados entre participantes (Seção 11.5). Resultados na Seção 25.1.
 
 Materiais complementares (perfil dos participantes, termo de consentimento, protocolo do experimento) ficam em `docs/documents/`.
 
@@ -106,7 +106,7 @@ Materiais complementares (perfil dos participantes, termo de consentimento, prot
 
 **Legenda:** ✅ Implementado · 🚧 Em desenvolvimento · ⬜ Planejado · ❌ Cancelado
 
-Todas as funcionalidades estão implementadas. Foram verificadas no computador com o XR Simulation (Seção 22.1) e no smartphone, no teste preliminar de 27/10/2026 (Seção 22.2) e nos testes técnicos de 07/11/2026 (Seção 22.3).
+Todas as funcionalidades estão implementadas. Foram verificadas no computador com o XR Simulation (Seção 22.1) e no smartphone, no teste preliminar de 27/10/2026 (Seção 22.2) e nos testes técnicos (Seção 22.3).
 
 ---
 
@@ -116,7 +116,7 @@ Todas as funcionalidades estão implementadas. Foram verificadas no computador c
 |---|---|---|---|
 | RNF01 | Plataforma | Executar em smartphones Android compatíveis com ARCore, sem acessórios adicionais | APK Android (ARM64, IL2CPP, ARCore obrigatório) instalado e executado no Samsung Galaxy A56 5G |
 | RNF02 | Qualidade de rastreamento | Reconhecer corretamente os marcadores nas condições de iluminação, distância e ângulo do experimento, sem falsos reconhecimentos | Marcadores com nota ≥ 75 no arcoreimg. Com marcadores de 8 cm, reconhecimento até cerca de 40 cm, nos ângulos e nas iluminações testados, sem associações erradas (Seção 22.3) |
-| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; nunca abaixo de 15 FPS nos testes de 07/11/2026 (Seção 22.3) |
+| RNF03 | Desempenho | Manter o rastreamento utilizável durante a tarefa, com referência inicial de 15 FPS | Contador de FPS na tela; nunca abaixo de 15 FPS nos testes técnicos (Seção 22.3) |
 | RNF04 | Estabilidade | Completar uma sessão experimental sem falhas que exijam reinício da aplicação | Sessões completas no smartphone, sem travamento nem reinício; CSV gravado a cada evento (Seção 22.3) |
 | RNF05 | Disponibilidade | Operar sem conexão com a internet, com o conteúdo armazenado localmente | Conteúdo empacotado no APK; sessão completa em modo avião (Seção 22.3) |
 | RNF06 | Usabilidade | Textos legíveis à distância de uso e operação com uma das mãos | Fonte proporcional à tela e botões grandes na parte de baixo |
@@ -151,7 +151,7 @@ Todas as funcionalidades estão implementadas. Foram verificadas no computador c
 |---|---|---|---|
 | Smartphone | Samsung Galaxy A56 5G (de um integrante) | Android; consta na lista oficial de aparelhos compatíveis com ARCore | Execução, testes e experimento (app executado em 27/10/2026) |
 | Computador | MSI MS-7E06 | Windows 11 Pro, Intel Core i7-13700, 32 GB de RAM, NVIDIA GeForce RTX 4060 | Desenvolvimento, simulação e build |
-| Painel virtual | Painel 3D do projeto, exibido na tela de um computador | Disjuntor, contator e relé de sobrecarga, com os marcadores impressos fixados ao lado de cada componente | Cenário dos testes técnicos de 07/11/2026 |
+| Painel virtual | Painel 3D do projeto, exibido na tela de um computador | Disjuntor, contator e relé de sobrecarga, com os marcadores impressos fixados ao lado de cada componente | Cenário dos testes técnicos |
 | Marcadores impressos | — | 3 imagens de 8 × 8 cm, papel fosco | Referências de rastreamento |
 
 ---
@@ -245,6 +245,7 @@ No Android 11 ou superior, essa pasta não aparece no gerenciador de arquivos do
 | `INFO_EXIBIDA` | Um componente fica pelo menos 0,3 s na mira e suas informações aparecem |
 | `IDENTIFICACAO` | Participante confirma um componente (`correto` = 1 ou 0) |
 | `CONFIRMACAO_SEM_MARCADOR` | Toque em Confirmar sem marcador na mira (não conta como identificação) |
+| `CONFIRMACAO_BLOQUEADA` | Toque em Confirmar antes de a mira ficar 0,5 s parada sobre o mesmo marcador (não conta como identificação; `componente_indicado` mostra o marcador que estava na mira) |
 
 **Taxa de erros (%) = identificações incorretas ÷ 15 × 100**, com 15 identificações por participante (3 componentes × 5 etapas).
 
@@ -280,7 +281,9 @@ Ao carregar o conteúdo, o `ConteudoPainel` confere se os dois conjuntos são eq
 
 Como os componentes são os mesmos nos dois conjuntos, o efeito de aprendizagem é reduzido, mas não eliminado (Seção 24). O `analisar.ps1` mostra os conjuntos usados, a taxa de erros por conjunto e avisa quando um participante repete o mesmo conjunto.
 
-Os instrumentos de percepção do estudo piloto (Termo de Consentimento, questionário de caracterização, SUS e roteiro de entrevista) foram elaborados pela equipe e são descritos no artigo científico.
+Os instrumentos de percepção do estudo piloto (Termo de Consentimento, questionário de caracterização, SUS e perguntas abertas) foram elaborados pela equipe e são descritos no artigo científico.
+
+**Coleta remota.** Sem acesso a um painel físico, a coleta foi feita a distância e sem acompanhamento: cada participante recebeu o APK, a imagem do painel virtual (para abrir em tela cheia no computador, conferindo com uma régua o tamanho dos marcadores), o manual em PDF e a ordem das condições; aceitou o Termo de Consentimento por mensagem; usou o próprio celular; e respondeu a um Google Forms. Na condição papel, registrou a posição do marcador apontado em cada etapa (E, C ou D), e não o nome do componente, para a resposta não poder ser copiada do manual.
 
 ---
 
@@ -545,6 +548,14 @@ Telas do aplicativo:
 | Etapa | Conduzir a identificação | Barra de progresso com etapa, participante e conjunto, mira, destaque laranja no marcador pedido, título e instrução da etapa, cartão Na mira com nome, função e alerta, botão Confirmar componente, contador de FPS | Apontar a mira para o marcador e confirmar |
 | Resumo | Encerrar a sessão | Participante e conjunto, acertos, erros, taxa de erros, tempo e caminho do CSV, botão Próximo participante | Passar ao próximo participante |
 
+Botão de confirmação depois da correção pós-piloto (Seção 22.4), em quadros de um vídeo gravado no smartphone: o botão enche de verde enquanto a mira fica parada e só libera a confirmação após 0,5 s.
+
+![Sequência do botão de confirmação sendo liberado após 0,5 s de mira parada](docs/images/correcao-confirmacao-sequencia.png)
+
+| Toque antes da liberação |
+|---|
+| ![Toque recusado com a mensagem para manter a mira parada](docs/images/correcao-confirmacao-toque-recusado.png) |
+
 Captura a adicionar: foto do painel virtual em tela com os marcadores impressos fixados.
 
 ---
@@ -585,9 +596,9 @@ Teste feito pela equipe no Samsung Galaxy A56 5G, com os marcadores exibidos na 
 
 Observação: com os marcadores na tela do monitor, o tamanho real deles não é de 8 cm. Por isso, os rótulos 3D apareceram maiores e deslocados (por exemplo, "Disjuntor geral DJ1" no topo da tela de resumo). O posicionamento dos rótulos precisa ser conferido com os marcadores impressos no tamanho correto.
 
-### 22.3 Testes técnicos no smartphone (07/11/2026)
+### 22.3 Testes técnicos no smartphone
 
-Os critérios foram definidos antes da execução, conforme a Seção 3.9 do artigo. Como não foi possível usar um painel físico, os testes foram feitos **remotamente** pelos integrantes, com o painel virtual do projeto exibido na tela de um computador e os **marcadores impressos em 8 × 8 cm** fixados ao lado de cada componente.
+Os critérios foram definidos antes da execução, conforme a Seção 3.9 do artigo. Os testes foram feitos ao longo do desenvolvimento, depois do teste preliminar da Seção 22.2. Como não foi possível usar um painel físico, foram feitos **remotamente** pelos integrantes, com o painel virtual do projeto exibido na tela de um computador e os **marcadores impressos em 8 × 8 cm** fixados ao lado de cada componente.
 
 As tentativas não foram registradas de forma padronizada por condição: um integrante fez 7 tentativas, e os demais fizeram tentativas adicionais, somando pelo menos 10 no total. A iluminação foi variada nas condições disponíveis em casa, sem medição de luz. Por isso, os resultados de reconhecimento são observações da equipe, não contagens por condição. A planilha `docs/testes/Testes_Tecnicos.xlsx` traz o modelo para a contagem detalhada.
 
@@ -602,7 +613,7 @@ As tentativas não foram registradas de forma padronizada por condição: um int
 | Operação offline | 1 sessão em modo avião | Sessão completa | Sessão completa em modo avião | ✅ |
 | Registro de dados | Conferir CSVs das sessões de teste | 15 linhas `IDENTIFICACAO` por sessão; erros iguais aos provocados | Sessão com erros provocados nas etapas 4 e 12: 15 linhas `IDENTIFICACAO`, `correto = 0` só nessas etapas e resumo com 13 acertos, 2 erros e 13,3%. As outras duas sessões completas: 15 de 15 | ✅ |
 
-Os CSVs das sessões estão em `docs/testes/sessoes/` (códigos de teste, sem participantes):
+Os registros das sessões anteriores foram perdidos quando o aplicativo foi desinstalado para instalar a versão nova, porque o Android apaga a pasta do aplicativo junto. Os CSVs mantidos, em `docs/testes/sessoes/`, são das sessões de conferência feitas com a versão final do aplicativo, já com os conjuntos A e B (códigos de teste, sem participantes):
 
 | Arquivo | Conjunto | Resultado |
 |---|---|---|
@@ -613,8 +624,25 @@ Os CSVs das sessões estão em `docs/testes/sessoes/` (códigos de teste, sem pa
 **Consequências para o experimento:**
 
 - com marcadores de 8 cm, o participante precisa ficar a até cerca de 40 cm dos marcadores; para distâncias maiores, é preciso imprimir marcadores maiores e atualizar o tamanho físico na biblioteca de imagens;
-- as sessões de teste usaram só o conjunto A; vale fazer uma sessão completa com o conjunto B antes da coleta;
-- antes da coleta, os CSVs de teste devem ser removidos do celular, porque os códigos P01 e P02 serão usados pelos participantes.
+- as sessões de conferência usaram só o conjunto A; o conjunto B foi usado na coleta por P03 e P04 sem falhas, e na verificação da Seção 22.4;
+- na coleta, cada participante usou o próprio celular, então os CSVs de teste não se misturaram aos dos participantes.
+
+### 22.4 Verificação da correção da confirmação (pós-piloto)
+
+No estudo piloto (Seção 25.1), os 6 erros com o app aconteceram com o aplicativo associando corretamente o marcador, mas com a confirmação feita com a mira sobre outro marcador: em 4 deles, o do componente da etapa anterior, logo depois de a etapa começar. A correção:
+
+- o botão **Confirmar** só é liberado depois de **0,5 s** com a mira parada sobre o mesmo marcador, e enche de verde durante a espera ("SEGURE A MIRA...");
+- a contagem recomeça a cada etapa, então um toque logo depois de avançar não confirma a etapa seguinte;
+- o toque antes da liberação não conta como identificação: aparece o aviso "Mantenha a mira parada..." e o CSV grava `CONFIRMACAO_BLOQUEADA`;
+- o tempo pode ser ajustado no Inspector, em `ProcedimentoController` → **Tempo Minimo Para Confirmar**.
+
+Sessão de verificação com a versão corrigida, no smartphone, tocando em Confirmar logo depois de avançar a etapa e com o celular em movimento:
+
+| Arquivo | Conjunto | Resultado |
+|---|---|---|
+| `P07_RA_B_20261107_205419.csv` | B | 15 acertos, 0 erros, 47,1 s; 5 toques recusados (`CONFIRMACAO_BLOQUEADA`), 3 deles 0,3 a 0,4 s após o início da etapa, com a mira no componente da etapa anterior (etapas 5, 11 e 12) |
+
+É uma verificação técnica: mostra que o app recusa os toques prematuros, mas o efeito da correção sobre a taxa de erros ainda precisa ser avaliado com novos participantes.
 
 ---
 
@@ -624,7 +652,8 @@ Os CSVs das sessões estão em `docs/testes/sessoes/` (códigos de teste, sem pa
 |---|---|---|---|
 | Computador (XR Simulation no editor Unity) | Windows 11 Pro | Unity 6000.6.7f1 | Sessões completas sem falha (Seção 22.1) |
 | Samsung Galaxy A56 5G (de um integrante) | Android | — | Aplicativo executado; 2 sessões completas no teste preliminar, a 27–30 FPS (Seção 22.2) |
-| Smartphones Android dos integrantes, nos testes remotos | Android | — | Testes técnicos de 07/11/2026 (Seção 22.3) |
+| Smartphones Android dos integrantes, nos testes remotos | Android | — | Testes técnicos (Seção 22.3) e verificação da correção (Seção 22.4) |
+| Samsung Galaxy S23, S24 e S26 e Motorola moto g53 (dos participantes) | Android | — | 4 sessões completas do estudo piloto, sem travamento nem reinício (Seção 25.1) |
 
 ---
 
@@ -633,10 +662,11 @@ Os CSVs das sessões estão em `docs/testes/sessoes/` (códigos de teste, sem pa
 - O reconhecimento depende de iluminação adequada, papel fosco e marcadores planos e visíveis.
 - Funciona apenas em aparelhos compatíveis com ARCore.
 - Prova de conceito com 3 componentes e um único procedimento.
-- Por ser um estudo piloto com 2 a 4 participantes, a análise é apenas descritiva, sem inferência estatística; os resultados são evidências preliminares de viabilidade.
+- Por ser um estudo piloto com 4 participantes, a análise é apenas descritiva, sem inferência estatística; os resultados são evidências preliminares de viabilidade.
+- A coleta foi remota e sem acompanhamento: a ordem das condições não pôde ser verificada, e as respostas e o tempo da condição papel foram informados pelos próprios participantes.
+- A correção da confirmação (Seção 22.4) foi verificada tecnicamente, mas ainda não foi avaliada com participantes.
 - Os resultados valem para uma tarefa controlada, sem intervenção elétrica, e não devem ser generalizados para manutenção real nem interpretados como redução de acidentes.
 - Mudanças no conteúdo exigem novo build, porque o JSON é empacotado dentro do APK.
-- O conteúdo técnico do arquivo `conteudo_painel.json` foi elaborado pela equipe e não foi validado por profissional da área elétrica.
 - O aplicativo reconhece o **marcador** colado ao lado do componente, e não o componente: na simulação, foi natural mirar no próprio componente. As instruções padrão aos participantes precisam deixar isso claro.
 - Os testes usaram um painel virtual exibido em tela, e não um painel elétrico físico. O comportamento em um painel real (reflexos, superfícies metálicas, espaço disponível e iluminação do ambiente) não foi verificado.
 - Com marcadores de 8 cm, o reconhecimento funciona até cerca de 40 cm.
@@ -656,7 +686,31 @@ Disponíveis:
 - capturas das cinco telas atuais do aplicativo (Seção 21);
 - foto do painel virtual com os componentes indicados (`docs/impressao/foto_painel.jpg`);
 - manuais impressos, fichas de observação e folha dos marcadores em `docs/impressao/`;
-- CSVs das sessões dos testes técnicos de 07/11/2026 em `docs/testes/sessoes/` (Seção 22.3).
+- CSVs das sessões dos testes técnicos em `docs/testes/sessoes/` (Seções 22.3 e 22.4);
+- quadros do vídeo da correção da confirmação (Seção 21).
+
+Os dados dos participantes (CSVs do app e respostas do formulário) não ficam no repositório: conforme o Termo de Consentimento, são guardados em pasta de acesso restrito à equipe. Aqui ficam apenas os resultados agregados por código.
+
+### 25.1 Resultados do estudo piloto
+
+Quatro estudantes (P01 a P04), com o próprio celular, em coleta remota (Seção 11.5). Resultados detalhados e discussão no artigo científico.
+
+| Indicador | P01 | P02 | P03 | P04 |
+|---|---|---|---|---|
+| Conjunto: app / manual | A / B | A / B | B / A | B / B (desvio) |
+| Erros no app (taxa) | 2 (13,3%) | 0 (0,0%) | 1 (6,7%) | 3 (20,0%) |
+| Erros no manual | 0 | 0 | 0 | 0 |
+| Tempo no app (s) | 72,2 | 66,9 | 61,0 | 324,8 |
+| Tempo no manual (s) | 216 | 233 | 128 | desconsiderado* |
+| SUS | 80,0 | 87,5 | 87,5 | 77,5 |
+
+\* O tempo informado para o manual (325 s) era igual ao do app e foi desconsiderado.
+
+- **Hipótese H1** (menos erros com RA): não sustentada; o app teve mais erros que o manual em 3 participantes e o mesmo número em 1.
+- **Origem dos erros:** nos 6 erros, o app associou corretamente o marcador, mas a confirmação foi feita com a mira sobre outro marcador, em 4 casos o do componente da etapa anterior. Isso levou à correção da Seção 22.4.
+- **Tempo:** para P01 a P03, a tarefa com o app levou de 29% a 48% do tempo com o manual.
+- **SUS:** média de 83,1.
+- **Desvios:** P04 usou o conjunto B nas duas condições; P01 respondeu a uma versão anterior do formulário; a pergunta de exclusão foi mal interpretada por três participantes, que confirmaram não ter participado do desenvolvimento.
 
 Pendentes:
 
@@ -672,7 +726,7 @@ Quando o vídeo de demonstração for publicado, o link será adicionado aqui.
 | Recurso | Link |
 |---|---|
 | Código-fonte | https://github.com/KauanHYT/UPX8---Painel-Eletrico |
-| Artigo científico | `docs/documents/` |
+| Artigo científico | `docs/documents/ARTIGO_CIENTIFICO_FINAL_Equipe4.docx` |
 | Teste no computador | `docs/TESTE_NO_PC.md` |
 | Marcadores | `docs/MARCADORES.md` |
 | Coleta e análise dos dados | `docs/ANALISE.md` |
@@ -688,15 +742,15 @@ Estimativa de 6 semanas e cerca de 100 horas de trabalho da equipe.
 |---|---|---|
 | Revisão bibliográfica | Equipe | ✅ |
 | Definição do painel, componentes e procedimento | Equipe | ✅ (painel virtual, 3 componentes, conjuntos A e B; conteúdo `0.2-provisoria`) |
-| Validação técnica do conteúdo por profissional | Equipe | ❌ (não realizada, por decisão da equipe) |
 | Protótipos de interface | Kauan | ✅ |
 | Implementação da aplicação | Enrico e Kauan | ✅ (inclui conjuntos A e B e rodízio) |
 | Integração do reconhecimento de marcadores | Enrico e Kauan | ✅ (verificada no smartphone com marcadores impressos) |
 | Materiais da condição papel e script de análise | Equipe | ✅ |
-| Testes técnicos | Equipe | ✅ (07/11/2026; reconhecimento até cerca de 40 cm com marcadores de 8 cm) |
+| Testes técnicos | Equipe | ✅ (reconhecimento até cerca de 40 cm com marcadores de 8 cm) |
 | Protocolo experimental | Guilherme | ✅ (instrumentos de coleta elaborados) |
-| Coleta e análise dos dados | Equipe | ⬜ |
-| Versão final do artigo | Equipe | 🚧 |
+| Coleta e análise dos dados | Equipe | ✅ (4 participantes, coleta remota; Seção 25.1) |
+| Correção da confirmação (pós-piloto) | Equipe | ✅ (verificada tecnicamente; Seção 22.4) |
+| Versão final do artigo | Equipe | ✅ |
 
 ---
 
@@ -762,6 +816,14 @@ O repositório oficial é https://github.com/KauanHYT/UPX8---Painel-Eletrico. O 
 
 **Solução:** no experimento, o participante trabalha a até cerca de 40 cm dos marcadores. Para distâncias maiores, é preciso imprimir marcadores maiores e atualizar o tamanho físico de cada imagem na `PainelReferenceImageLibrary`.
 
+### Erros de confirmação no estudo piloto
+
+**Sintoma:** no estudo piloto, o app teve 6 erros em 60 identificações, enquanto o manual não teve nenhum.
+
+**Causa:** pelo CSV, em todos os erros o cartão **Na mira** mostrava o componente confirmado, ou seja, o app associou corretamente o marcador, mas a confirmação foi feita com a mira sobre outro marcador: em 4 casos, o do componente da etapa anterior, logo depois de a etapa começar; em um deles, 0,12 s depois de a mira chegar ao marcador errado. O botão aceitava a confirmação assim que havia qualquer marcador na mira.
+
+**Solução:** confirmação só liberada após 0,5 s de mira parada sobre o mesmo marcador, com contagem reiniciada a cada etapa e registro dos toques recusados (`CONFIRMACAO_BLOQUEADA`). Verificada na Seção 22.4.
+
 ### Comandos do Unity em linha de comando não abriam o projeto
 
 **Causa:** o projeto estava aberto no editor, e o Unity não abre o mesmo projeto duas vezes.
@@ -772,6 +834,8 @@ O repositório oficial é https://github.com/KauanHYT/UPX8---Painel-Eletrico. O 
 
 ## 30. Melhorias Futuras
 
+- avaliar a correção da confirmação (Seção 22.4) com novos participantes;
+- marcadores maiores e mais espaçados, sobretudo entre o contator K1 e o relé FT1;
 - ampliar o número de componentes e procedimentos;
 - carregar o conteúdo de um arquivo externo, sem precisar de novo build;
 - exportar os CSVs direto pelo aplicativo (compartilhamento);
